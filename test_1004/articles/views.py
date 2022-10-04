@@ -23,8 +23,12 @@ def new(request):
 def create(request):
   # 실제 DB에 저장하는 로직
   # GET에서 'title' 정보를 가져옴
+  '''
   title = request.GET.get('title')
   content = request.GET.get('content')
+  '''
+  title = request.POST.get('title')
+  content = request.POST.get('content')
   # models.py의 Article
   # DB에 저장
   Article.objects.create(title=title, content=content)
