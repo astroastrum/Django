@@ -10,9 +10,17 @@
   <!-- POST method 사용시 csrf_token을 반드시 작성 -->
   <!-- create 함수에서 값을 받을 때 request.POST로 값을 받아서 처리 -->
   {% csrf_token %}
+  <!-- csrf란? 
+  input type="hidden"으로 만들어줌 
+  POST 요청은 DB에 전송하기 위해 사용함
+  혹시 요청이 들어왔을 때 다른 사이트에서 
+  요청이 변조된 것이 아닌지 확인하는 로직 -->
+  {{ article_form.as_p }}
+  <!-- as_p해서 p태그로 감싼다 -->
   <label for="title">제목 : </label>
-  <input type="text" name="title" id="title">
+  <input type="text" name="title" id="title" required>
+  <!-- required를 사용해도 서버측에서도 검증 로직을 이중화해야함 -->
   <label for="content">내용 : </label>
-  <textarea name="content" id="content" cols="30" rows="10"></textarea>
+  <textarea name="content" id="content" cols="30" rows="10" required></textarea>
   <input type="submit" value="글쓰기">
 </form>
