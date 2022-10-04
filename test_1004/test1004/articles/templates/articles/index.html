@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <h1>게시판</h1>
+  <a href="{% url 'articles:new' %}">글 쓰기</a>
+  <!-- articles는 context에 있는 dictionary의 키 사용 -->
+  {% for article in articles %}
+    <h3>{{ article.title }}</h3>
+    <p>{{ article.create_at }} | {{ article.updated_at }}</p>
+    <hr>
+  {% endfor %}
+</body>
+</html>
