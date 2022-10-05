@@ -1,3 +1,7 @@
+{% load django_bootstrap5 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,12 +13,14 @@
 <body>
   <form action="{% url 'articles:create' %}" method="POST">
     {% csrf_token %}
+
+    {% bootstrap_form article_form %}
     {{ article_form.as_p }}
-    <label for="title">제목 : </label>
+    <!--<label for="title">제목 : </label>
     <input type="text" name="title" id="title">
     <label for="content">내용 : </label>
-    <textarea name="content" id="content" cols="30" rows="10"></textarea>
-    <input type="submit" value="글쓰기">
+    <textarea name="content" id="content" cols="30" rows="10"></textarea>-->
+    {% bootstrap_button button_type="submit" content="OK" %}
   </form>  
 </body>
 </html>
