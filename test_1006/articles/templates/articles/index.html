@@ -1,0 +1,22 @@
+<h1>게시판</h1>
+
+<ul>
+  {% for article in articles %}
+    <li>title:
+      {{ article.title }}
+      <!-- article의 pk값이 동적인자로 전달된다 -->
+      <a href="{% url 'articles:delete' article.pk %}">
+        [삭제]
+      </a>
+    </li>
+    <a href="{% url 'articles:detail' %}">
+      [수정]
+    </a>
+  {% endfor %}
+</ul>
+
+<a href="{% url 'articles:new' %}">글쓰기</a>
+{% for article in articles %}
+  <h3>{{ article.title }}</h3>
+  <hr>
+{% endfor %}

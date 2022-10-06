@@ -1,0 +1,10 @@
+<h1>글 수정 edit.html</h1>
+<!-- 그냥 update하면 생성하는 것과 같다 -->
+<!-- 특정 pk값으로 데이터를 불러오고 데이터를 수정하고 저장한다 -->
+<form action="{% url 'posts:update' article.pk %}">
+  제목:
+  <input type="text" name="title" value="{{ post.title }}"><br>
+  내용:
+  <input type="text" name="content" value="{{ article.content }}">
+  <input type="submit">
+</form>
