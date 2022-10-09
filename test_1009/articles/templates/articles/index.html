@@ -1,0 +1,31 @@
+<h1>index.html</h1>
+<h1>게시판</h1>
+<a href="{% url 'articles:new' %}">글쓰기</a>
+<!-- 사용자가 작성한 글을 보여줌 -->
+{% for article in articles %}
+  <h3>{{ article.title }}</h3>
+  <hr>
+{% endfor %}
+
+<ul>
+  {% for article in articles %}
+    <!-- ID: {{ articles.id }}하면 글의 ID가 표시된다 -->
+    <li>ID:
+      {{ articles.id }}
+      |
+      <a href="{% url 'articles:detail' articles.pk %}">
+        제목:
+        {{ articles.title }}
+      </a>
+      <!-- 몇 번째 글을 지울 것인지 pk로 표시한다 -->
+      <!-- 원래는 /articles/detail/1 이러한 형태-->
+      <!-- ID를 URL에 넣는 느낌 -->
+      <!-- <a href="/articles/detail/{{ articles.id }}"> -->
+      <a href="{% url 'articles:edit' articles.pk %}">
+        [수정]
+      </a>
+      <!-- articles의 pk값이 동적인자로 전달된다 -->
+      <a href="{% url 'articles:delete' articles.pk %}">[삭제]</a>
+    </li>
+  {% endfor %}
+</ul>
