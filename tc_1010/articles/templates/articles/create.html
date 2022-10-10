@@ -4,5 +4,8 @@
   <p>작성내용:
     {{ content }}
   </p>
-  <a href="/articles">홈으로</a>
+  <!-- <a href="/articles">홈으로</a> -->
+  <!-- 장고가 지원하는 문법 사용 -->
+  <a href="{% url 'articles:index' %}">홈으로</a>
+
 {% endblock %}
