@@ -24,4 +24,6 @@ urlpatterns = [
     # 값을 어떤 이름으로 활용해야 하는지 작성
     # 사용자는 사용자의 이름을 작성한다
     path('welcome/<name>/', views.welcome),
+    path('fake/', views.fake, name='fake'),
+    path('fakenaver/', views.fakenaver, name='fakenaver'),
 ]

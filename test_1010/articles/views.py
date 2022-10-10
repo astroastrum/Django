@@ -14,7 +14,7 @@ def index(request):
 '''
 
 
-'''
+
 def index(request):
   names = ['october', 'november', 'december']
   name = random.choice(names)
@@ -23,9 +23,9 @@ def index(request):
     'img': 'https://thumbs.dreamstime.com/b/welcome-sign-flower-blooming-decoration-pink-background-175919766.jpg',
   }
   return render(request, 'index.html', context)
-'''
 
-'''
+
+
 # 사용자들이 랜덤하게 입력할 값을 다룰 수 있는 변수 = name
 # 사용자들의 입력값 = name
 def welcome(request, name):
@@ -44,4 +44,10 @@ def welcome(request, name):
   }
   return render(request, 'welcome.html', context)
 
-'''
+
+def fake(request):
+  return render(request, 'fake.html')
+
+
+def fakenaver(request):
+  return render(request, 'fakenaver.html')
