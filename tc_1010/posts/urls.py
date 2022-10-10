@@ -14,4 +14,6 @@ urlpatterns = [
   path('', views.index, name='index'),
   path('new/', views.new, name='new'),
   path('create/', views.create, name='create'),
+  # pk의 자료형은 int
+  path('delete/<int:pk>', views.delete, name='delete'),
 ]

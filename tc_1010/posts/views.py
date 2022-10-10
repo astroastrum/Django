@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import Post
 
 # Create your views here.
@@ -32,4 +32,13 @@ def create(request):
     'title': title,
     'content': content,
   }
-  return render(request, 'posts/create.html', context)
+  # return render(request, 'posts/create.html', context)
+  return redirect('posts:index')
+
+
+def delete(request, pk):
+  # pk에 해당하는 글 삭제
+  # id에는 pk를 넣을것이다
+  Post.objects.get(id=pk).delete()
+  # 삭제는 페이지를 보여주는 것이 아니라 해당 글을 삭제하는 것
+  return redirect('posts:index')

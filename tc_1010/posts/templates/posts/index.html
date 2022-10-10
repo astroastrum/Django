@@ -3,10 +3,13 @@
   <h1>게시판</h1>
   <ul>
     {% for post in posts %}
-      <li>제목:
+      <li>ID:
+        {{ post.id }}
+        | 제목:
         {{ post.title }}
         | 내용:
         {{ post.content }}
+        <a href="">[수정]</a>/<a href="/posts/delete/{{ post.id }}">[삭제]</a>
       </li>
     {% endfor %}
     <li>제목: 두번째글
@@ -15,4 +18,8 @@
   <a href="{% url 'posts:new' %}">새글작성</a>
 
   <!-- 작성된 글을 보여주려면 DB에서 가져와야 한다 -->
+  <!-- 특정한 글을 삭제하고 싶으면 특정한 글을 타겟팅을 해야한다 -->
+  <!-- 수정과 삭제는 항상 primary key가 반드시 필요하다 -->
+  <!-- 몇 번째 글을 삭제하겠다 -->
+  <!-- DB의 몇 번째 글을 수정하고 삭제하겠다 -->
 {% endblock %}
