@@ -19,7 +19,7 @@
     <h2>글 작성</h2>
     <!-- <form action="/articles/create/" method="GET"> -->
     <!-- 그냥 create작성하면 NoReverseMatch -->
-    <!-- namespace 생성 'articles:create'-->
+    <!-- 앱별로 namespace 생성 중요 'articles:create' -->
     <form action="{% url 'articles:create' %}" method="GET">
       <input type="text" name="content">
       <input type="submit">

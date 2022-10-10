@@ -18,7 +18,7 @@ from django.urls import path, include
 # from practices import views as practices_views
 # from articles import views as articles_views
 
-
+# 메인 문지기
 urlpatterns = [
     path('admin/', admin.site.urls),
     # path('index/', practices_views.index),
@@ -29,4 +29,6 @@ urlpatterns = [
     # path('', articles_views.index),
     path('articles/', include('articles.urls')),
     path('practices/', include('practices.urls')),
+    # posts로 들어오는 주문은 posts 안의 urls에서 핸들링한다
+    path('posts/', include('posts.urls')),
 ]
