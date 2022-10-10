@@ -2,10 +2,10 @@ from django.shortcuts import render
 
 # Create your views here.
 def index(request):
-  return render(request, 'index.html')
+  return render(request, 'practices/index.html')
 
 def ping(request):
-  return render(request, 'ping.html')
+  return render(request, 'practices/ping.html')
 
 def pong(request):
   # request가 어떤게 가능한건지 보기 위한것(메소드, 내용을 볼때)
@@ -20,4 +20,4 @@ def pong(request):
   context = {
     'name': ball,
   }
-  return render(request, 'pong.html', context)
+  return render(request, 'practices/pong.html', context)

@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block content %}
+  <div>
+    <h1>Articles의 index.html</h1>
+    <h1>방명록</h1>
+  </div>
+  <div>
+    <h2>글 목록</h2>
+    <!-- userwriting안에 하나 하나 content라는 이름으로 뽑아내서 -->
+    {% for content in userwriting %}
+      <!-- content를 보여줄것이다 -->
+      <!-- {{ content }}만 작성하면 한 줄에 대한 객체가 다 출력된다. 그래서 이 중에 content만 보여줄것이다 -->
+      <!-- content안의 content만 -->
+      <p>{{ content.content }}</p>
+    {% endfor %}
+    <!-- <p>글1</p> <p>글2</p> -->
+  </div>
+  <div>
+    <h2>글 작성</h2>
+    <form action="/articles/create/" method="GET">
+      <input type="text" name="content">
+      <input type="submit">
+    </form>
+  </div>
+
+{% endblock %}
