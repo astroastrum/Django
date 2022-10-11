@@ -2,6 +2,8 @@ from django.shortcuts import render, redirect
 # 인증과 관련된 곳에 forms에 UserCreationForm을 가지고 오면
 # from django.contrib.auth.forms import UserCreationForm
 from .forms import CustomUserCreationForm
+from django.contrib.auth import get_user_model
+# from .models import User 사용금지
 
 # Create your views here.
 def signup(request):
@@ -26,3 +28,16 @@ def signup(request):
   }
   return render(request, 'accounts/signup.html', context)
   # invalid한 시점의 form은 오류 메시지가 모두 담겨있는 form, UserCreationForm(request.POST)
+
+# 프로필 페이지
+def detail(request, pk):
+  # User 정보를 불러와서 return render
+  # User 정보를 받아오는 쿼리셋 API
+  # from django.contrib.auth import get_user_model
+  # 함수로 참조 (User Class를 참조)
+  # User = get_user_model() 또는
+  user = get_user_model().objects.get(pk=pk)
+  context = {
+    'user': user
+  }
+  return render(request, 'accounts/detail.html', context)
