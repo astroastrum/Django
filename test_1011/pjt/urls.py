@@ -18,6 +18,7 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('articles/', include('articles.urls')),
     # accounts라고 하는 모든 경로로 들어오면 accounts 앱에 있는 urls.py 모듈 자체 등록
     path('accounts/', include('accounts.urls')),
 ]
