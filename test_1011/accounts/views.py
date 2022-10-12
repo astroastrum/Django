@@ -1,9 +1,12 @@
 from django.shortcuts import render, redirect
+# from .models import User 사용금지
 # 인증과 관련된 곳에 forms에 UserCreationForm을 가지고 오면
 # from django.contrib.auth.forms import UserCreationForm
-from .forms import CustomUserCreationForm
 from django.contrib.auth import get_user_model
-# from .models import User 사용금지
+from django.contrib.auth import login as auth_login
+from django.contrib.auth import logout as auth_logout
+from django.contrib.auth.forms import AuthenticationForm
+from .forms import CustomUserCreationForm
 
 # Create your views here.
 def signup(request):
@@ -18,7 +21,8 @@ def signup(request):
   if request.method == 'POST':
     form = CustomUserCreationForm(request.POST)
     if form.is_valid():
-      form.save()
+      user = form.save()
+      auth_login(request, user)
       return redirect('articles:index')
   else: # GET 요청일때
       form = CustomUserCreationForm()
@@ -41,3 +45,29 @@ def detail(request, pk):
     'user': user
   }
   return render(request, 'accounts/detail.html', context)
+
+
+def index(request):
+  return render(request, 'accounts/index.html')
+
+
+def login(request):
+    if request.method == 'POST':
+      # AuthenticationForm은 ModelForm이 아님
+        form = AuthenticationForm(request, data=request.POST)
+        if form.is_valid():
+        # 세션에 저장
+        # login 함수는 request, user 객체를 인자로 받음
+        # user 객체는 form에서 인증된 유저 정보를 받을 수 있음
+            auth_login(request, form.get_user())
+            return redirect(request.GET.get('next') or 'articles:index')
+    else:
+      form = AuthenticationForm()
+    context = {
+      'form': form,
+    }
+    return render(request, 'accounts/login.html', context)
+
+def logout(request):
+  auth_logout(request)
+  return redirect('articles:index')

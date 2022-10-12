@@ -1,20 +1,18 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'base.html' %}
+{% load django_bootstrap5 %}
 
-  <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-  </head>
+{% block body %}
+  <h1>회원가입</h1>
+  <form action="" method="POST">
+    {% csrf_token %}
+    {% bootstrap_form form %}
+    <!-- 공백 제거 필요 : 자동 정렬 원인 -->
+    {% bootstrap_button button_type = "submit" content = "OK" %}
+  </form>
 
-  <body>
-    <h1>회원가입</h1>
-    <!-- 회원가입에 필요한 form을 제공한다 -->
-    <!-- 회원가입 form은 model form이 필요하다 -->
-    <!-- User와 연결된 model form이 필요한데 가져와야 한다 (VIEW에 작성)-->
-    {{ form.as_p }}
+  <!-- 회원가입에 필요한 form을 제공한다 -->
+  <!-- 회원가입 form은 model form이 필요하다 -->
+  <!-- User와 연결된 model form이 필요한데 가져와야 한다 (VIEW에 작성)-->
 
-  </body>
-
-</html>
+  <!-- {{ form.as_p }} -->
+{% endblock body %}

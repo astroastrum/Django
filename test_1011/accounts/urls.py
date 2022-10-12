@@ -8,6 +8,9 @@ app_name = 'accounts'
 urlpatterns = [
   # 회원가입 기능
    path('signup/', views.signup, name='signup'),
+   path('login/', views.login, name='login'),
    # 프로필 페이지
    path('<int:pk>/', views.detail, name='detail'),
+   path('logout/', views.logout, name='logout'),
+   path('', views.index, name='index'),
 ]
