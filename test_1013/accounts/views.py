@@ -1,10 +1,15 @@
 from django.shortcuts import render, redirect
-# 인증과 관련된 곳에 UserCreationForm = 회원가입 form = user과 연결된 ModelForm
-# from django.contrib.auth.forms import UserCreationForm
-from .forms import CustomUserCreationForm
 # detail에서 User 참조할 때 from .models import User 사용금지
 # from .models import User 사용금지
 from django.contrib.auth import get_user_model
+# 로그인 세션
+from django.contrib.auth import login as auth_login
+# 로그인 form
+from django.contrib.auth.forms import AuthenticationForm
+# 인증과 관련된 곳에 UserCreationForm = 회원가입 form = user과 연결된 ModelForm
+# from django.contrib.auth.forms import UserCreationForm
+from .forms import CustomUserCreationForm
+
 
 
 # Create your views here.
@@ -87,3 +92,30 @@ def detail(request, pk):
     'user': user
   }
   return render(request, 'accounts/detail.html', context)
+
+
+def login(request):
+    # 로그인 로직 추가
+    if request.method == 'POST':
+        # AuthenticationForm은 ModelForm이 아님
+        # data의 argument로 request에 POST가 들어올 것 같음
+        form = AuthenticationForm(request, data=request.POST)
+        if form.is_valid():
+            # ModelForm이 아니라서 save() 없음
+            # form.save()
+            # 이곳에 들어갈 로직은?
+            # 세션에 저장, 로그인 함수가 내장되어 있음
+            # User정보를 form으로부터 가져올 수 있음
+            # login 함수는 request와 user 객체를 인자로 받음
+            # user 객체는 form에서 인증된 user 정보를 받을 수 있음
+            auth_login(request, form.get_user())
+            # request.GET.get('next') : /articles/1/update/
+            # request.GET.get('next'), 이 값에 따라서 조건문을 만든다
+            return redirect(request.GET.get('next')) or 'articles:index') 
+    else:
+    # form 처리 한다고 로그인이 되는 것은 아니여서 로작을 추가해야 한다
+        form = AuthenticationForm()
+    context = {
+      'form': form
+    }
+    return render(request, 'accounts/login.html', context)

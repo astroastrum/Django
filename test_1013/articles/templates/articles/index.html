@@ -8,6 +8,7 @@
 
 {% block body %}
   <h1>게시판</h1>
+  <!-- 만약에 request.user가 authenticated면 그때만 보여줌 -->
   {% if request.user.is_authenticated %}
     <a href="{% url 'articles:create' %}">글 쓰기</a>
   {% endif %}

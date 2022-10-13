@@ -1,9 +1,13 @@
 {% extends 'base.html' %}
 {% block content %}
-  <h1>작성 완료</h1>
-  <p>제목:
-    {{ title }}</p>
-  <p>내용:
-    {{ content }}</p>
-  <a href="{% url 'articles:index' %}">목록으로</a>
+  <h1>글쓰기</h1>
+  <form action="{% url 'articles:create' %}" method="POST">
+    {% csrf_token %}
+    Title:
+    <!-- 작성한 내용이 그대로 나타나고 수정할 수 있다 -->
+    <input type="text" name="title"><br>
+    Content:
+    <input type="text" name="content">
+    <input type="submit" content="ok">
+  </form>
 {% endblock %}

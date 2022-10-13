@@ -65,7 +65,7 @@ TEMPLATES = [
             'context_processors': [
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
-                'django.contrib.auth.context_processors.auth',
+                'django.contrib.auth.context_processors.auth', # 인증과 관련된 context를 처리
                 'django.contrib.messages.context_processors.messages',
             ],
         },

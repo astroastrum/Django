@@ -12,14 +12,21 @@
   </head>
 
   <body>
+    <!-- 로그아웃 -->
+    <!-- request.user가 인증이 되었다면 -->
+    <!-- 회원가입 들어가서 로그인 인증이 되면 로그아웃 표시 -->
+    {% if request.user.is_authenticated %}
+      <span>{{ request.user }}</span>
+      <a href="">로그아웃</a>
+    {% else %}
+      <!-- 회원가입 링크 -->
+      <a href="{% url 'accounts:signup' %}">회원가입</a>
+      <!-- 로그인 링크 -->
+      <a href="{% url 'accounts:login' %}">로그인</a>
+
+    {% endif %}
+
     <div class="container my-5">
-      <div class="my-3">
-
-        <span>{{ request.user }}</span>
-
-        <a href="{% url 'accounts:signup' %}">회원가입</a>
-
-      </div>
       {% block body %}{% endblock body %}
     </div>
     {% bootstrap_javascript %}
