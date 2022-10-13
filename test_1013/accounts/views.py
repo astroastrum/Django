@@ -2,7 +2,9 @@ from django.shortcuts import render, redirect
 # 인증과 관련된 곳에 UserCreationForm = 회원가입 form = user과 연결된 ModelForm
 # from django.contrib.auth.forms import UserCreationForm
 from .forms import CustomUserCreationForm
-
+# detail에서 User 참조할 때 from .models import User 사용금지
+# from .models import User 사용금지
+from django.contrib.auth import get_user_model
 
 
 # Create your views here.
@@ -74,3 +76,14 @@ def signup(request):
 
 
 '''
+
+# User class 참조하는 것만 다름
+def detail(request, pk):
+  # User 정보를 받아오는 쿼리셋 API 
+  # User class 참조할 때 어떻게 작성? from .models import User가 아닌 from django.contrib.auth import get_user_model
+  # user = User.objects.get(pk=pk), User가 아닌 get_user_model()
+  user = get_user_model().objects.get(pk=pk)
+  context = {
+    'user': user
+  }
+  return render(request, 'accounts/detail.html', context)
