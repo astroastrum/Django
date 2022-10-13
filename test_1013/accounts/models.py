@@ -22,4 +22,7 @@ from django.contrib.auth.models import AbstractUser
 # AbstractUser를 상속받음
 # 프로젝트 시작할 때 설정
 class User(AbstractUser):
-  pass
+  
+    @property
+    def full_name(self):
+        return f'{self.last_name}{self.first_name}'

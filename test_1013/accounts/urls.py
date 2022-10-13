@@ -8,6 +8,7 @@ app_name = 'accounts'
 urlpatterns = [
   path('signup/', views.signup, name='signup'),
   path('login/', views.login, name='login'),
+  path('update/', views.update, name='update'),
   # User 상세보기
   # integer로 pk를 받는다
   path('<int:pk>/', views.detail, name='detail'),

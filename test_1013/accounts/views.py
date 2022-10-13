@@ -4,11 +4,14 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import get_user_model
 # 로그인 세션
 from django.contrib.auth import login as auth_login
+from django.contrib.auth import logout as auth_logout
+from django.contrib.auth.decorators import login_required
 # 로그인 form
 from django.contrib.auth.forms import AuthenticationForm
 # 인증과 관련된 곳에 UserCreationForm = 회원가입 form = user과 연결된 ModelForm
 # from django.contrib.auth.forms import UserCreationForm
-from .forms import CustomUserCreationForm
+# from .forms import CustomUserCreationForm
+from .forms import CustomUserChangeForm, CustomUserCreationForm
 
 
 
@@ -111,7 +114,7 @@ def login(request):
             auth_login(request, form.get_user())
             # request.GET.get('next') : /articles/1/update/
             # request.GET.get('next'), 이 값에 따라서 조건문을 만든다
-            return redirect(request.GET.get('next')) or 'articles:index') 
+            return redirect(request.GET.get('next') or 'articles:index') 
     else:
     # form 처리 한다고 로그인이 되는 것은 아니여서 로작을 추가해야 한다
         form = AuthenticationForm()
@@ -119,3 +122,23 @@ def login(request):
       'form': form
     }
     return render(request, 'accounts/login.html', context)
+
+def logout(request):
+    auth_logout(request)
+    return redirect('articles:index')
+
+
+
+@login_required
+def update(request):
+    if request.method == 'POST':
+        form = CustomUserChangeForm(request.POST, instance=request.user)
+        if form.is_valid():
+          form.save()
+          return redirect('accounts:detail', request.user.pk)
+    else:
+        form = CustomUserChangeForm(instance=request.user)
+    context = {
+        'form': form
+    }
+    return render(request, 'accounts/update.html', context)
