@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block content %}
+  <h1>작성 완료</h1>
+  <!-- 사용자가 작성한 데이터를 넣어준다 -->
+  <!-- 작성한 내용을 create 페이지에서 바로 볼 수 있다 -->
+  <p>제목:
+    {{ title }}</p>
+  <p>내용:
+    {{ content }}</p>
+  <a href="{% url 'posts:index' %}">홈으로 돌아가기</a>
+{% endblock content %}

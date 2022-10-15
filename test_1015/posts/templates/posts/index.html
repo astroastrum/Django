@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block content %}
+  <h1>게시판</h1>
+  <ul>
+    {% for post in posts %}
+      <li>ID:
+        {{ post.id }}
+        |
+        <a href="">제목:
+          {{ post.title }}</a>
+        | 내용:
+        {{ post.content }}
+        <a href="">[수정]</a>
+        <a href="">[삭제]</a>
+      </li>
+    {% endfor %}
+  </ul>
+
+  <a href="{% url posts:new %}">새글 작성</a>
+{% endblock content %}
