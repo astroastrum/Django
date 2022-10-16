@@ -14,7 +14,7 @@ def index(request):
 
 
 def new(request):
-  return render(request)
+  return render(request, 'posts/new.html')
 
 
 def create(request):
@@ -31,3 +31,20 @@ def create(request):
     'content': content,
   }
   return redirect('posts:index')
+
+
+def delete(request, pk):
+  # pk에 해당하는 글 삭제
+  # 삭제할 특정 데이터를 불러오고 삭제한다
+  Post.objects.get(id=pk).delete()
+  # 삭제는 페이지를 보여주는 것이 아니라 해당 글을 삭제하는 것
+  return render('posts/index')
+
+
+def detail(request, pk_):
+  # 특정 pk의 데이터를 불러온다
+  post = Post.objects.get(pk = pk_)
+  context = {
+    'post': post,
+  }
+  return render(request, 'posts/detail.html', context)
