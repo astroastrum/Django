@@ -8,6 +8,6 @@
 
 {% block body %}
   <h1>수업 정리 모음</h1>
-  <a href="">글 쓰기</a><br>
-  <a href="">복습하기</a>
+  <a href="{% url 'articles:create' %}">글 쓰기</a><br>
+  <a href="{% url 'articles:update' article.pk %}">복습하기</a>
 {% endblock %}

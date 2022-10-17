@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.contrib import messages
 from .models import Article
 from .forms import ArticleForm
 
@@ -44,3 +45,19 @@ def detail(request, pk):
     'article': article
   }
   return render(request, 'articles/detail.html', context)
+
+
+def update(request, pk):
+    article = Article.objects.get(pk=pk)
+    if request.method == 'POST':
+        article_form = ArticleForm(request.POST, request.FILES, instance=article)
+        if article_form.is_valid():
+            article_form.save()
+            messages.success(request, '글 수정 완료')
+            return redirect('articles:detail', article.pk)
+    else:
+        article_form = ArticleForm(instance=article)
+    context = {
+        'article_form': article_form
+    }
+    return render(request, 'articles/form.html', context)
