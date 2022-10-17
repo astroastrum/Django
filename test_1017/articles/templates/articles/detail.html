@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block body %}
+  <h1>{{ article.pk }}번 게시글</h1>
+
+  <p>{{ article.content }}
+  </p>
+
+  <a href="{% url '' article.pk %}">수정하기</a>
+{% endblock %}

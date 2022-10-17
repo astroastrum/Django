@@ -7,7 +7,12 @@
 {% endblock %}
 
 {% block body %}
-  <h1>수업 정리 모음</h1>
-  <a href="">글 쓰기</a><br>
-  <a href="">복습하기</a>
+  <h1>글쓰기</h1>
+  <form action="" method="POST">
+    {% csrf_token %}
+    {% bootstrap_form article_form %}
+
+    <input type="submit">
+  </form>
+
 {% endblock %}
