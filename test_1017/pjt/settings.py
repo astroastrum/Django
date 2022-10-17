@@ -125,7 +125,8 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 # Media files (user uploaded files)
-
+# MEDIA_ROOT라고 하는것은 경로를 BASE_DIR에 images라고 적고 
+# MEDIA_URL은 /media/
 MEDIA_ROOT = BASE_DIR / 'images'
 MEDIA_URL = '/media/'
 

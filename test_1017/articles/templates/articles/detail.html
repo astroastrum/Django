@@ -2,9 +2,11 @@
 
 {% block body %}
   <h1>{{ article.pk }}번 게시글</h1>
-
   <p>{{ article.content }}
   </p>
-
+  <!-- 이미지 추가하면 보이지 않고 받아갈 수 없음 -->
+  <!-- 장고 서버에는 이미지가 저장되어 있는데 서버에서 서빙을 해 줄 설정이 되지 않았음 -->
+  <!-- 그래서 MEDIA_ROOT와 MEDIA_URL 설정 필요 -->
+  <img src="{{ article.image.url }}" alt="{{ article.image }}">
   <a href="{% url '' article.pk %}">수정하기</a>
 {% endblock %}
