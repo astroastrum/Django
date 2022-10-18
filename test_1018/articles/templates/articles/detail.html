@@ -27,7 +27,7 @@
     <h4>댓글 목록</h4>
     {% if comments %}
       <p>
-        <b>{{ comments length }}개의 댓글이 있습니다.</p>
+        <b>{{ comments | length }}개의 댓글이 있습니다.</p>
       {% endif %}
 
       {% empty %}
