@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load django_bootstrap5 %}
+
+{% block css %}
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+{% endblock %}
+
+{% block body %}
+  <h1>create.html</h1>
+  <h1>글 작성 완료</h1>
+  <!-- 게시글 작성후 index.html으로 돌아가게함 -->
+
+{% endblock %}

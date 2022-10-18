@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load django_bootstrap5 %}
+
+{% block css %}
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+{% endblock %}
+
+{% block body %}
+  <h1>사용자의 입력을 받을 페이지</h1>
+  <!-- create.html으로 -->
+  <!-- GET은 단순 조회 기능 -->
+  <!-- POST는 DB에 변경 요청 기능 -->
+  <form action="{% url 'articles:create' %}" method="GET">
+    <label for="title">title:
+    </label>
+    <input type="text" name="title"><br>
+    <label for="content">content:
+    </label>
+    <textarea name="content"></textarea><br>
+    <input type="submit">
+  </form>
+  <hr>
+  <a href="{% url 'articles:index' %}">index.html으로</a>
+{% endblock %}
