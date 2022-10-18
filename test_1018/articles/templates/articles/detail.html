@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load django_bootstrap5 %}
+
+{% block body %}
+  <h1>{{ article.pk }}번 게시글</h1>
+  <p>{{ article.content }}</p>
+  {% if article.image %}
+    <img src="{{ article.image.url }}" alt="{{ article.image }}">
+  {% endif %}
+  <a href="{% url 'articles:update' article.pk %}">수정하기</a>
+  <h4 class="my-3">댓글</h4>
+  <form action="{% url 'articles:comment_create' article.pk %}" method="POST">
+    {% csrf_token %}
+    {% bootstrap_form comment_form %}
+    <input type="submit">
+  </form>
+  <hr>
+  <!-- article에 있는 것을 호출해서 사용 -->
+  {% for comment in comments %}
+    <li>
+      {{ comment.content }}
+      <form action="{% url 'articles:comment_delete' article.pk %}" method="POST">
+        {% csrf_token %}
+        <input type="submit" value="DELETE">
+      </form>
+    </li>
+    <h4>댓글 목록</h4>
+    {% if comments %}
+      <p>
+        <b>{{ comments length }}개의 댓글이 있습니다.</p>
+      {% endif %}
+
+      {% empty %}
+      <p>댓글 없음</p>
+    {% endfor %}
+  {% endblock %}
