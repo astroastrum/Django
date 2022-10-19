@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load django_bootstrap5 %}
+
+{% block css %}
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+{% endblock %}
+
+{% block body %}
+  <h1>detail.html</h1>
+  <h1>글 작성후 작성된 글 확인 페이지</h1>
+
+  <span>제목:
+    {{ article.title }}</span>
+  |
+  <span>내용:
+    {{ article.content }}</span>
+
+  <hr>
+  <a href="{% url 'articles:index' %}">index.html으로</a>
+
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load django_bootstrap5 %}
+
+{% block css %}
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+{% endblock %}
+
+{% block body %}
+  <h1>index.html</h1>
+  <a href="{% url 'articles:new' %}">new.html에서 글 작성하기</a>
+
+  {% for article in articles %}
+    <p>title:
+    </p>
+    <p>content:
+    </p>
+    <!-- endfor 밖에서 해보기 -->
+    <a href="{% url 'articles:detail' article.pk %}">[detail에서 작성한글 확인]</a>
+  {% endfor %}
+
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load django_bootstrap5 %}
+
+{% block css %}
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+{% endblock %}
+
+{% block body %}
+  <h1>new.html</h1>
+  <h2>글 작성</h2>
+  <!-- 글 작성해서 create으로 보내기 -->
+  <!-- create 함수에서 작성한 글 db에 저장 -->
+  <form action="{% url 'articles:create' %}" method="POST">
+    {% csrf_token %}
+    title:
+    <input type="text" name="title">
+    <br>
+    content:
+    <input type="text" name="content">
+    <input type="submit">
+  </form>
+  <a href="{% url 'articles:index' %}">index.html으로</a>
+
+{% endblock %}
