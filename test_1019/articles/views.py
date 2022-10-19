@@ -22,6 +22,10 @@ def new(request):
   return render(request, 'articles/new.html', context)
 
 
+
+'''
+ModelForm 활용전 create 함수
+
 def create(request):
   # DB에 저장
   # 1. parameter로 날라온 데이터를 받아서
@@ -36,7 +40,21 @@ def create(request):
   
   # article.pk 오류
   # return redirect('articles:detail', article.pk)
-  
+'''
+
+
+# ModelForm 활용 후 create 함수의 변화
+def create(request):
+  # 유효성 검사
+  form = ArticleForm(request.POST)
+  if form.is_valid():
+    # DB에 저장
+    article = form.save()
+    return redirect('articles:detail', article.pk)
+  return redirect('articles:new')
+
+
+ 
 
 
 def detail(request, pk):
@@ -48,12 +66,15 @@ def detail(request, pk):
   return render(request, 'articles/detail.html', context)
 
 
+
 # detail 페이지에 작성
 def delete(request, pk):
   # 특정 pk의 데이터를 불러온다
   article = Article.objects.get(pk=pk)
   article.delete()
   return redirect('articles:index')
+
+
 
 
 # detail 페이지에 edit 페이지로 이동하는 링크를 작성한다
@@ -68,6 +89,10 @@ def edit(request, pk):
   return render(request, 'articles/edit.html', context)
 
 
+
+'''
+ModelForm 활용 전 update 함수 
+
 # edit.html에 <form action="{% url 'articles:update' article.pk %}" method="POST">
 def update(request, pk):
   article = Article.objects.get(pk=pk)
@@ -77,8 +102,20 @@ def update(request, pk):
   # update을 하면 detail 페이지로 이동
   return redirect('articles:detail', article.pk)
 
+'''
 
-
-
+# ModelForm 활용한 UPDATE
+def edit(request, pk):
+  article = Article.objects.get(pk=pk)
+  form = ArticleForm(request.POST, instance=article)
+  if form.is_valid():
+    form.save()
+    return redirect('articles:detail', article.pk)
+    
+  context = {
+    'article': article,
+    'form': form,
+  }
+  return render(request, 'articles/edit.html', context)
 
 
