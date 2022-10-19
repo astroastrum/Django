@@ -83,8 +83,10 @@ def delete(request, pk):
 # db에 저장되면 실제로 edit한 글이 update된다
 def edit(request, pk):
   article = Article.objects.get(pk=pk)
+  form = ArticleForm(instance=article)
   context = {
     'article': article,
+    'form': form,
   }
   return render(request, 'articles/edit.html', context)
 
@@ -105,13 +107,13 @@ def update(request, pk):
 '''
 
 # ModelForm 활용한 UPDATE
-def edit(request, pk):
+def update(request, pk):
   article = Article.objects.get(pk=pk)
   form = ArticleForm(request.POST, instance=article)
   if form.is_valid():
     form.save()
     return redirect('articles:detail', article.pk)
-    
+
   context = {
     'article': article,
     'form': form,
