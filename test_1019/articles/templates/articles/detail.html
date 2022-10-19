@@ -15,8 +15,17 @@
   |
   <span>내용:
     {{ article.content }}</span>
-
   <hr>
-  <a href="{% url 'articles:index' %}">index.html으로</a>
+  <a href="{% url 'articles:index' %}">[index로 돌아가기]</a>
+  <hr>
+  <h3>edit 페이지로 이동하기 위한 링크</h3>
+  <a href="{% url 'articles:edit' article.pk %}">[edit]</a>
+  <hr>
+  <h3>delete 기능도 detail page에 작성</h3>
+  <form action="{% url 'articles:delete' article.pk %}" method="POST">
+    {% csrf_token %}
+    <input type="submit" value="DELETE">
+  </form>
+  <a href="{% url 'articles:index' %}">[index로 돌아가기]</a>
 
 {% endblock %}
