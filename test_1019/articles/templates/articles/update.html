@@ -5,12 +5,13 @@
 {% block css %}
   <link rel="stylesheet" href="{% static 'css/style.css' %}">
 {% endblock %}
+
 {% block body %}
-  <h1>signup 회원가입</h1>
-  <!-- {{form.as_p }}-->
-  <form action="" method="POST">
+  <h1>update 이미지 수정</h1>
+
+  <form action="{% url 'accounts:update' article.pk %}" method="POST" enctype="multipart/form-data">
     {% csrf_token %}
     {% bootstrap_form form %}
-    <input type="submit" content="OK">
+    <input type="submit">
   </form>
 {% endblock body %}

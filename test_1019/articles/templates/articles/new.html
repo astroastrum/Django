@@ -12,13 +12,23 @@
   <h2>글 작성</h2>
   <!-- 글 작성해서 create으로 보내기 -->
   <!-- create 함수에서 작성한 글 db에 저장 -->
-  <form action="{% url 'articles:create' %}" method="POST">
+  <form action="{% url 'articles:create' %}" method="POST" enctype="multipart/form-data">
     {% csrf_token %}
     <!-- ModelForm 활용하기 -->
     <!-- p태그로 감싸진 필드들 -->
-    {{ form.as_p }}
-    <input type="submit">
+    <!-- {{ form.as_p }} -->
+    {% bootstrap_form form %}
+
+    <input type="submit" value="작성">
     <!-- ModelForm 활용 전 코드 title: <input type="text" name="title"> <br> content: <input type="text" name="content"> <input type="submit"> -->
+  </form>
+  <hr>
+  <h3>commentform</h3>
+  <a href="{% url 'articles:index' %}">to index</a>
+  <form action="#" method="POST">
+    {% csrf_token %}
+    {% bootstrap_form comment_form %}
+    <input type="submit">
   </form>
   <hr>
   <a href="{% url 'articles:index' %}">index.html으로</a>

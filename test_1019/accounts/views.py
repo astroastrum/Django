@@ -1,12 +1,13 @@
 from django.shortcuts import render, redirect
 # from django.contrib.auth.forms import UserCreationForm
 from .forms import CustomUserChangeForm, CustomUserCreationForm
-from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.forms import AuthenticationForm, PasswordChangeForm
 from django.contrib.auth import login as auth_login
 from django.contrib.auth import logout as auth_logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import get_user_model
 from django.contrib import messages
+from django.contrib.auth import update_session_auth_hash
 
 
 # Create your views here.
@@ -14,7 +15,8 @@ def signup(request):
   if request.method == 'POST':
     form = CustomUserCreationForm(request.POST)
     if form.is_valid():
-      form.save()
+      user = form.save()
+      auth_login(request, user)
       return redirect('articles:index')
 
   else:
@@ -83,3 +85,23 @@ def update(request):
         'form': form
     }
     return render(request, 'accounts/update.html', context)
+
+
+def change_password(request):
+  if request.method == 'POST':
+    form = PasswordChangeForm(request.user, request.POST)
+    if form.is_valid():
+      form.save()
+      update_session_auth_hash(request, form.user)
+      return redirect('articles:index')
+  else:
+    form = PasswordChangeForm(request.user)
+    context = {
+      'form': form,
+    }
+    return render(request, 'accounts/change_password.html', context)
+
+
+def delete(request):
+  request.user.delete()
+  auth_logout(request)

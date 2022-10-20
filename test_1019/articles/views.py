@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
-from .models import Article
-from .forms import ArticleForm
+from .models import Article, Comment
+from .forms import ArticleForm, CommentForm
 from django.contrib.auth.decorators import login_required
 
 # Create your views here.
@@ -19,8 +19,10 @@ def index(request):
 '''
 def new(request):
   form = ArticleForm()
+  comment_form = CommentForm()
   context = {
     'form': form,
+    'comment_form': comment_form,
   }
   return render(request, 'articles/new.html', context)
 
@@ -69,9 +71,10 @@ def create(request):
 '''
 
 @login_required
+
 def create(request):
     if request.method == 'POST':
-      article_form = ArticleForm(request.POST)
+      article_form = ArticleForm(request.POST, request.FILES)
       # article_form이 유효한지 검사
       if article_form.is_valid():
           article_form.save()
@@ -82,7 +85,7 @@ def create(request):
       'article_form': article_form
     }
   
-    return render(request, 'articles/form.html', context=context)
+    return render(request, 'articles/new.html', context=context)
 
 
 
@@ -110,8 +113,10 @@ def create(request):
 def detail(request, pk):
   # 특정 pk의 데이터를 불러온다
   article = Article.objects.get(pk=pk)
+  comment_form = CommentForm()
   context = {
     'article': article,
+    'comment_form': comment_form,
   }
   return render(request, 'articles/detail.html', context)
 
@@ -206,7 +211,7 @@ def update(request, pk):
     article = Article.objects.get(pk=pk)
     if request.method == 'POST':
         # POST : input 값 가져와서, 검증하고, DB에 저장
-        article_form = ArticleForm(request.POST, instance=article)
+        article_form = ArticleForm(request.POST, request.FILES, instance=article)
         if article_form.is_valid():
             # 유효성 검사 통과하면 저장하고, 상세보기 페이지로
             article_form.save()
@@ -219,3 +224,13 @@ def update(request, pk):
         'article_form': article_form
     }
     return render(request, 'articles/form.html', context)
+
+
+def comments_create(request, pk):
+    article = Article.objects.get(pk=pk)
+    comment_form = CommentForm(request.POST)
+    if comment_form.is_valid():
+        comment = comment_form.save(commit=False)
+        comment.article = article
+        comment_form.save()
+    return redirect('articles:detail', article.pk)
