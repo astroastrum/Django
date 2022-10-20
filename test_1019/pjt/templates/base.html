@@ -12,9 +12,19 @@
   </head>
 
   <body>
+    {% if request.user.is_authenticated %}
+      <span>{{ request.user }}</span>
+      <a href="">로그아웃</a>
+    {% else %}
+
+      <h4>{{ user }}</h4>
+      <a href="{% url 'accounts:signup' %}">Signup</a>
+      <a href="{% url 'accounts:login' %}">로그인</a>
+    {% endif %}
     <div class="container my-5">
       {% block body %}{% endblock body %}
     </div>
+
     {% bootstrap_javascript %}
   </body>
 

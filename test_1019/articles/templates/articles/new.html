@@ -7,6 +7,7 @@
 {% endblock %}
 
 {% block body %}
+  <!-- <h1>new.html</h1> 였음 -->
   <h1>new.html</h1>
   <h2>글 작성</h2>
   <!-- 글 작성해서 create으로 보내기 -->
@@ -19,6 +20,7 @@
     <input type="submit">
     <!-- ModelForm 활용 전 코드 title: <input type="text" name="title"> <br> content: <input type="text" name="content"> <input type="submit"> -->
   </form>
+  <hr>
   <a href="{% url 'articles:index' %}">index.html으로</a>
 
 {% endblock %}

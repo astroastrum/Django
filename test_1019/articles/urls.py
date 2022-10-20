@@ -10,7 +10,7 @@ urlpatterns = [
   # create page: 작성한 글을 db에 저장
   path('create/', views.create, name='create'),
   # detail page: 작성한 글을 보여주는 목록
-  path('<int:pk>', views.detail, name='detail'),
+  path('<int:pk>/', views.detail, name='detail'),
   path('<int:pk>/delete/', views.delete, name='delete'),
   path('<int:pk>/edit/', views.edit, name='edit'),
   path('<int:pk>/update/', views.update, name='update'),

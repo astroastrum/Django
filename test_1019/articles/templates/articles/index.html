@@ -8,9 +8,11 @@
 
 {% block body %}
   <h1>index.html</h1>
-  <a href="{% url 'articles:new' %}">new.html에서 글 작성하기</a>
+  <!-- <a href="{% url 'articles:new' %}">new.html에서 글 작성하기</a> 였음 -->
+  {% if request.user.is_authenticated %}
+    <a href="{% url 'articles:create' %}">create</a>
+  {% endif %}
   <hr>
-
   {% for article in articles %}
     <span>title:
       {{ article.title }}
@@ -25,5 +27,6 @@
     <a href="{% url 'articles:delete' article.pk %}">[delete]</a>
     <hr>
   {% endfor %}
-
+  <hr>
+  <img src="{% static 'artcles/autumn_02.jpeg' %}" alt="">
 {% endblock %}

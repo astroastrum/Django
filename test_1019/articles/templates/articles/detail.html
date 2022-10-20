@@ -18,9 +18,13 @@
   <hr>
   <a href="{% url 'articles:index' %}">[index로 돌아가기]</a>
   <hr>
-  <h3>edit 페이지로 이동하기 위한 링크</h3>
-  <a href="{% url 'articles:edit' article.pk %}">[edit]</a>
-  <hr>
+
+  <h3>update 페이지로 이동하기 위한 링크</h3>
+  <!-- <h3>edit 페이지로 이동하기 위한 링크</h3> 였음 -->
+  <!-- <a href="{% url 'articles:edit' article.pk %}">[edit]</a> 였음 -->
+  <a href="{% url 'articles:update' article.pk %}">[update]</a>
+  <br>
+
   <h3>delete 기능도 detail page에 작성</h3>
   <form action="{% url 'articles:delete' article.pk %}" method="POST">
     {% csrf_token %}

@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load django_bootstrap5 %}
+{% block body %}
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">pk</th>
+        <th scope="col">username</th>
+        <th scope="col">email</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th scope="row">1</th>
+        <td>
+          <a href="{% url 'accounts:detail' %}">olive</a>
+        </td>
+        <td></td>
+      </tr>
+      <tr>
+        <th scope="row">2</th>
+        <td>
+          <a href="{% url 'accounts:detail' %}">lemon</td>
+          <td>lemon@google.com</td>
+        </tr>
+        <tr>
+          <th scope="row">3</th>
+          <td colspan="2">
+            <a href="{% url 'accounts:detail' %}">apple admin</td>
+            <td>admin@google.com</td>
+          </tr>
+        </tbody>
+      </table>
+
+    {% endblock body %}
