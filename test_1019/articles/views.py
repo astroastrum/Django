@@ -118,11 +118,11 @@ def detail(request, pk):
   # 특정 pk의 데이터를 불러온다
   article = Article.objects.get(pk=pk)
   comment_form = CommentForm()
-  
+  comments = article.comment_set.all()
   context = {
     'article': article,
     'comment_form': comment_form,
-    'comments': article.comment_set.all(),
+    'comments': comments,
   }
   return render(request, 'articles/detail.html', context)
 
@@ -247,3 +247,10 @@ def comment_create(request, pk):
         comment.user = request.user
         comment_form.save()
     return redirect('articles:detail', article.pk)
+
+
+def comments_delete(request, article_pk, comment_pk):
+  comment = Comment.objects.get(pk=comment_pk)
+  if request.user == comment.user:
+    comment.delete()
+  return redirect('articles:detail', article_pk)

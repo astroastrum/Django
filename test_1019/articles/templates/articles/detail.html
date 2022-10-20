@@ -19,24 +19,47 @@
 
   <h3>commentform 출력</h3>
   {% if request.user.is_authenticated %}
-    <a href="{% url 'articles:comment_create' article.pk %}">to commentcreate</a>
+    <a href="{% url 'articles:comment_create' article.pk %}">to index</a>
     <form action="#" method="POST">
       {% csrf_token %}
-      {% bootstrap_form comment_form layout = 'inline' %}
+      {{ comment_form }}
       <input type="submit">
     </form>
   {% endif %}
 
   <hr>
-  {% for comment in comments %}
+
+  <ul>
+    {% for comment in comments %}
+      <li>{{ comment.content }}
+        <form action="{% url 'articles:comments_delte' article.pk comment.pk %}" method='POST'>
+          {% csrf_token %}
+          <input type="submit" value="DELETE">
+        </form>
+      </li>
+      {% empty %}
+      <p>댓글이 없어요</p>
+    {% endfor %}
+  </ul>
+
+  <h4>댓글 목록</h4>
+  {% if comments %}
     <p>
-      {{ comment.user.username }}
-      |
-      {{ comment.content }}</p>
-    <hr>
-    {% empty %}
-    <p>댓글이 없어요</p>
-  {% endfor %}
+      <b>{{ comments|length }}개의 댓글이 있습니다</b>
+    </p>
+  {% endif %}
+  <ul>
+    <li>{{ comment.user }}
+      -
+      {{ comment.content }}
+      {% if request.user == comment.user %}
+        <form action="{% url 'articles:comments_delete' article.pk comment.pk %}" method="POST">
+          {% csrf_token %}
+          <input type="submit" value="DELETE">
+        </form>
+      {% endif %}
+    </li>
+  </ul>
 
   <!-- <h3>update 페이지로 이동하기 위한 링크</h3> -->
   <!-- <h3>edit 페이지로 이동하기 위한 링크</h3> 였음 -->
