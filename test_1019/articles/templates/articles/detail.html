@@ -1,29 +1,42 @@
 {% extends 'base.html' %}
-{% load static %}
 {% load django_bootstrap5 %}
-
-{% block css %}
-  <link rel="stylesheet" href="{% static 'css/style.css' %}">
-{% endblock %}
 
 {% block body %}
   <h1>detail.html</h1>
+  <h3>
+    <a href="{% url 'accounts:detail' article.user.pk %}">{{ article.user.username }}</a>
+  </h3>
   <h1>글 작성후 작성된 글 확인 페이지</h1>
-  <img src="{{ article.image.url }}" alt="{{ article.image }}">
-  <span>제목:
-    {{ article.title }}</span>
-  |
-  <span>내용:
-    {{ article.content }}</span>
-  <hr>
+  {% if article.image %}
+    <img src="{{ article.image.url }}" alt="{{ article.image }}">
+  {% endif %}
+
+  {% if request.user == article.user %}
+    <p>
+      <a href="{% url 'articles:update' article.pk %}">수정하기</a>
+    </p>
+  {% endif %}
 
   <h3>commentform 출력</h3>
-  <a href="{% url 'articles:index' %}">to index</a>
-  <form action="#" method="POST">
-    {% csrf_token %}
-    {% bootstrap_form comment_form %}
-    <input type="submit">
-  </form>
+  {% if request.user.is_authenticated %}
+    <a href="{% url 'articles:comment_create' article.pk %}">to commentcreate</a>
+    <form action="#" method="POST">
+      {% csrf_token %}
+      {% bootstrap_form comment_form layout = 'inline' %}
+      <input type="submit">
+    </form>
+  {% endif %}
+
+  <hr>
+  {% for comment in comments %}
+    <p>
+      {{ comment.user.username }}
+      |
+      {{ comment.content }}</p>
+    <hr>
+    {% empty %}
+    <p>댓글이 없어요</p>
+  {% endfor %}
 
   <!-- <h3>update 페이지로 이동하기 위한 링크</h3> -->
   <!-- <h3>edit 페이지로 이동하기 위한 링크</h3> 였음 -->

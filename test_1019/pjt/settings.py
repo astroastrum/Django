@@ -31,11 +31,11 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'accounts',
     'articles',
-    'imagekit',
+    'accounts',
     'django_bootstrap5',
     'django_extensions',
+    'imagekit',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -126,9 +126,6 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-STATICFILES_DIRS = [
-    BASE_DIR / 'static',
-]
 
 MEDIA_ROOT = BASE_DIR / 'images'
 MEDIA_URL = '/media/'
@@ -139,3 +136,5 @@ MEDIA_URL = '/media/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'accounts.User'
+
+MESSAGE_STORAGE = 'django.contrib.messages.storage.cookie.CookieStorage'
