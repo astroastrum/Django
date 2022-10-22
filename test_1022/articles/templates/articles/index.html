@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load django_bootstrap5 %}
+
+{% block css %}
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+{% endblock %}
+
+{% block body %}
+  <h1>index</h1>
+  <a href="">글 작성</a>
+  <hr>
+  {% for article in articles %}
+    <p>title: | content:
+    </p>
+    <hr>
+  {% endfor %}
+{% endblock %}
