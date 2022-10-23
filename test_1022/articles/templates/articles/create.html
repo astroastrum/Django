@@ -7,12 +7,10 @@
 {% endblock %}
 
 {% block body %}
-  <h1>index</h1>
-  <a href="{% url 'articles:create' %}">글 작성</a>
-  <hr>
-  {% for article in articles %}
-    <p>title: | content:
-    </p>
-    <hr>
-  {% endfor %}
+  <h1>form</h1>
+  <form action="{% url 'articles:create' %}" method="POST">
+    {% csrf_token %}
+    {% bootstrap_form form %}
+    <input type="submit" value="작성">
+  </form>
 {% endblock %}
