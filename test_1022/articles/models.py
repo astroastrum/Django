@@ -17,6 +17,20 @@ class Article(models.Model):
   user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
   like_users = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='like_articles')
   
-                                
 
-  
+# 수업                                
+# python manage.py shell_plus
+# article 하나 가져오기
+# a1 = Article.objects.all()[0]
+
+# like user 가져오기
+# u1 = User.objects.all()[0]
+
+# article object 7번 글에 좋아요를 누른 사람이 sun이라고 하는 사람이 있고
+# a1.like_users.add(u1)
+# al.like_users.all()
+
+# 'sun이라는 사람이 좋아요를 누른 글은 7번이다' 라고 저장되어 있음
+# u1.like_artcles.all()  
+
+
