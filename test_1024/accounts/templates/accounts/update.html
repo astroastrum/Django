@@ -7,6 +7,13 @@
 {% endblock %}
 
 {% block body %}
-  <h1>index</h1>
+  <h1>update</h1>
+
+  <form action="" method="POST">
+    {% csrf_token %}
+    {% bootstrap_form form %}
+    <input type="submit">
+
+  </form>
 
 {% endblock %}

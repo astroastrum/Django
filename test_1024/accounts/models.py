@@ -6,4 +6,7 @@ from django.contrib.auth.models import AbstractUser
 # 맞춤설정을 위해서
 # Create your models here.
 class User(AbstractUser):
-    pass
+    
+    @property
+    def full_name(self):
+        return f'{self.last_name}{self.first_name}'
