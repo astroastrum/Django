@@ -2,6 +2,8 @@ from django.shortcuts import render, redirect
 # from django.http import HttpResponse
 from .models import Article
 from .forms import ArticleForm
+from django.contrib.auth.decorators import login_required
+
 # Create your views here.
 # request = HTTP 요청 객체
 '''
@@ -98,3 +100,13 @@ def delete(request, pk):
     article = Article.objects.get(pk=pk)
     article.delete()
     return redirect('articles:index')
+
+
+@login_required
+def like(request, pk):
+    article = Article.objects.get(pk=pk)
+    if request.user in article.like_users.all():
+        article.like_users.remove(request.user)
+    else:
+        article.like_users.add(request.user)
+    return render('articles:detail', pk)
