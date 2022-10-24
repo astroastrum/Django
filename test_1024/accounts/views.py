@@ -73,6 +73,14 @@ def detail(request, pk):
     }
     return render(request, 'accounts/detail.html', context)
 
+
+def delete(request):
+    if request.user.is_authenticated:
+        request.user.delete()
+        auth_logout(request)
+        return redirect("accounts:login")
+
+
 @login_required
 def update(request):
     form = CustomUserChangeForm(instance=request.user)
