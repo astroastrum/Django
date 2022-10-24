@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load django_bootstrap5 %}
+
+{% block css %}
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+{% endblock %}
+
+{% block body %}
+  <h1>form</h1>
+  <form action="">
+    <!-- {% csrf_token %} -->
+    {% bootstrap_form form %}
+    <input type="submit" value="작성">
+  </form>
+{% endblock %}

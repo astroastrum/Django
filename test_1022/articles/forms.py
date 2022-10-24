@@ -6,4 +6,4 @@ class ArticleForm(forms.ModelForm):
   class Meta:
     # 어떤 모델을 기반으로 form을 만들것인가
     model = Article
-    fields = ['title', 'content']
+    fields = ['title', 'content', 'image']
