@@ -11,7 +11,14 @@ def index(request):
 
 # 함수 실행 결과를 웹 브라우저에 전달
 def index(request):
-    return render(request, 'articles/index.html')
+    # 모든 (사용자가 작성한)글 목록을 보여줌
+    # 1. DB에서 모든 글을 불러옴
+    articles = Article.objects.all()
+    context = {
+        'articles': articles
+    }
+    return render(request, 'articles/index.html', context)
+
 
 def new(request):
     article_form = ArticleForm()
@@ -51,7 +58,7 @@ def create(request):
         article_form = ArticleForm(request.POST)
         if article_form.is_valid():
             article_form.save()
-            return redirect('articles:index')
+            return redirect('articles:create')
     else:
         article_form = ArticleForm()
     context = {
@@ -68,7 +75,7 @@ def detail(request, pk):
     }
     return render(request, 'articles/detail.html', context)
 
-    
+
 def update(request, pk):
     article = Article.objects.get(pk=pk)
     if request.method == 'POST':
@@ -79,7 +86,8 @@ def update(request, pk):
     else:
         article_form = ArticleForm(instance=article)
     context = {
-        'article_form': article_form
+        'article_form': article_form,
+        'article': article,
     }
     return render(request, 'articles/new.html', context)
 
@@ -87,5 +95,6 @@ def update(request, pk):
 def delete(request, pk):
     # pk에 해당하는 글 삭제
     # 삭제할 특정 데이터를 불러오고 삭제
-    Article.objects.get(id=pk).delete()
-    return render('articles/index')
+    article = Article.objects.get(pk=pk)
+    article.delete()
+    return redirect('articles:index')

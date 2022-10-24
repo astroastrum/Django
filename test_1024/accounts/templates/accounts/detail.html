@@ -7,8 +7,6 @@
 {% endblock %}
 
 {% block body %}
-  <h1>index</h1>
-  <a href="{% url 'articles:new' %}">글 작성</a>
-  <hr>
+  <h1>{{ user.username }}님의 프로필</h1>
 
 {% endblock %}
