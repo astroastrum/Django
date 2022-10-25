@@ -10,9 +10,12 @@
   <h1>{{ user.username }}님의 프로필</h1>
 
   <!-- following -->
-  <a href=""></a>
+  <p>팔로우:
+    {{ user.following.count }}
+    | 팔로워:
+    {{ user.followers.count }}</p>
+  <a href="{% url 'accounts:follow' user.pk %}"></a>
   {% if request.user in user.followers.all %}
-
     팔로우 취소
   {% else %}
     팔로우
