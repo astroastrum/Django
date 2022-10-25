@@ -108,5 +108,7 @@ def like(request, pk):
     if request.user in article.like_users.all():
         article.like_users.remove(request.user)
     else:
+        # article에 좋아요 추가
+        # article에 like_users에 add(request의 user다)
         article.like_users.add(request.user)
     return render('articles:detail', pk)

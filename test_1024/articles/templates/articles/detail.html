@@ -2,16 +2,33 @@
 {% load static %}
 {% load django_bootstrap5 %}
 
-{% block css %}
-  <link rel="stylesheet" href="{% static 'css/style.css' %}">
-{% endblock %}
+{% block css %}{% endblock %}
 
 {% block body %}
   <h1>detail</h1>
+
   <p>제목:
     {{ article.title }}
     | 내용:
     {{ article.content }}</p>
+
+  <!-- 좋아요 기능 <span> <a href="{% url 'articles:like' article.pk %}"> {% if request.user in article.like_users.all %} <i class="bi bi-heart-fill"></i> 좋아요 취소 {% else %} <i class="bi bi-heart-fill"></i> 좋아요 {% endif %} </a> {{ article.lilke_users.count }}</span> -->
+
+  <!-- 좋아요 기능 -->
+  <span class="like-heart">
+    <a href="{% url 'articles:like' article.pk %}">
+      {% if request.user in article.like_users.all %}
+        <i class="bi bi-heart-fill"></i>
+
+      {% else %}
+        <i class="bi bi-heart"></i>
+
+      {% endif %}
+    </a>
+    {{ article.lilke_users.count }}</span>
+
+  <!-- article에 좋아요 누른 user들의 count -->
+  <span>{{ article.lilke_users.count }}</span>
   <a href="{% url 'articles:update' article.pk %}">수정</a>
   <a href="{% url 'articles:delete' article.pk %}">삭제</a>
 

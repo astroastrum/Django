@@ -106,3 +106,5 @@ def change_password(request):
             return redirect("accounts:detail", request.user.id)
     context = {"form": form}
     return render(request, "accounts/change_password.html", context)
+
+
