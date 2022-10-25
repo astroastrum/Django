@@ -6,7 +6,8 @@ from django.contrib.auth.models import AbstractUser
 # 맞춤설정을 위해서
 # Create your models here.
 class User(AbstractUser):
-    following
+    # A가 B를 팔로잉, 서로 친구가 아님(symmetrical=False)
+    following = models.ManyToManyField('self', symmetrical=False, related_name='followers')
     
     @property
     def full_name(self):
