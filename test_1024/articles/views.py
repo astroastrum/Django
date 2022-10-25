@@ -112,3 +112,38 @@ def like(request, pk):
         # article에 like_users에 add(request의 user다)
         article.like_users.add(request.user)
     return render('articles:detail', pk)
+
+
+@login_required
+def follow(request, pk):
+    # 팔로우 상태가 아니면, '팔로우'를 누르면 추가(add)
+    # user는 항상 get_user_model에서 
+    user = get_user_model().objects.get(pk=pk)
+    if request.user in user.followers.all():
+    # 프로필에 해당하는 유저를 로그인한 유저가
+        user.followings.add(request.user)
+    else:
+        user.followers.add(request.user)
+    return redirect('accounts:detail', pk)
+
+
+'''
+or
+
+@login_required
+def follow(request, pk):
+    # 팔로우 상태가 아니면, '팔로우'를 누르면 추가(add)
+    # user는 항상 get_user_model에서 
+    user = get_user_model().objects.get(pk=pk)
+    if request.user == user:
+        messages.warning(request, '스스로 팔로우 할 수 없습니다')
+        return redirect('accounts:detail', pk)
+        if request.user in user.followers.all():
+        # 프로필에 해당하는 유저를 로그인한 유저가
+            user.followings.add(request.user)
+    else:
+        user.followers.add(request.user)
+    return redirect('accounts:detail', pk)
+
+
+'''

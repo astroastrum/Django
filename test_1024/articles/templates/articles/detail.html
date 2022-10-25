@@ -27,6 +27,16 @@
     </a>
     {{ article.lilke_users.count }}</span>
 
+  <!-- following -->
+  <a href=""></a>
+  {% if request.user in user.followers.all %}
+
+    팔로우 취소
+  {% else %}
+    팔로우
+  {% endif %}
+  {{ user.following.count }}
+
   <!-- article에 좋아요 누른 user들의 count -->
   <span>{{ article.lilke_users.count }}</span>
   <a href="{% url 'articles:update' article.pk %}">수정</a>
