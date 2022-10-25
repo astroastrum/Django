@@ -6,6 +6,7 @@ from django.contrib.auth.models import AbstractUser
 # 맞춤설정을 위해서
 # Create your models here.
 class User(AbstractUser):
+    # 장고는 ManyToManyField를 사용해서 자동으로 중개 테이블 생성
     # A가 B를 팔로잉, 서로 친구가 아님(symmetrical=False)
     following = models.ManyToManyField('self', symmetrical=False, related_name='followers')
     
