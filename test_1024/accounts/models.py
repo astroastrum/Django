@@ -12,3 +12,9 @@ class User(AbstractUser):
     @property
     def full_name(self):
         return f'{self.last_name}{self.first_name}'
+
+# 팔로우 기능
+# 사용자 프로필 페이지에 들어가서,
+# 팔로우를 누르면 추가
+# (이미) 팔로우 상태이면,
+# 팔로우 취소 버튼을 누르면 삭제

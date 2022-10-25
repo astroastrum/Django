@@ -9,4 +9,17 @@
 {% block body %}
   <h1>{{ user.username }}님의 프로필</h1>
 
+  <!-- following -->
+  <a href=""></a>
+  {% if request.user in user.followers.all %}
+
+    팔로우 취소
+  {% else %}
+    팔로우
+  {% endif %}
+  {{ user.following.count }}
+
+  <!-- article에 좋아요 누른 user들의 count -->
+  <span>{{ article.lilke_users.count }}</span>
+
 {% endblock %}
