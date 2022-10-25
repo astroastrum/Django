@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load django_bootstrap5 %}
+
+{% block css %}
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+{% endblock %}
+
+{% block body %}
+
+  <h1>REVIEW</h1>
+  <div>
+    <p>movie_name:
+      {{ review.movie_name }}</p>
+    <p>grade:
+      {{ review.grade }}</p>
+    <p>title:
+      {{ review.title }}</p>
+    <p>content:
+      {{ review.content }}</p>
+    <hr>
+    <a href="{% url 'reviews:delete' review.pk %}">삭제</a>
+    <a href="{% url 'reviews:update' review.pk %}">수정</a>
+  </div>
+
+{% endblock %}

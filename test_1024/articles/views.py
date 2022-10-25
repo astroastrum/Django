@@ -21,13 +21,14 @@ def index(request):
     }
     return render(request, 'articles/index.html', context)
 
-
+''''
 def new(request):
     article_form = ArticleForm()
     context = {
         'article_form': article_form
     }
     return render(request, 'articles/new.html', context)
+'''
 
 '''
 def create(request):
@@ -54,19 +55,22 @@ def create(request):
     return redirect('articles:index')
 '''
 
+# GET과 POST의 합
 def create(request):
     if request.method == 'POST':
         # DB에 저장하는 로직
         article_form = ArticleForm(request.POST)
         if article_form.is_valid():
             article_form.save()
-            return redirect('articles:create')
+            return redirect('articles:index')
     else:
         article_form = ArticleForm()
     context = {
         'article_form': article_form
     }
-    return render(request, 'articles/index.html', context)
+    # 글 작성하는 버튼 누르면 get으로 전달됨
+    # 링크를 누르면 홈페이지로 넘어감
+    return render(request, 'articles/create.html', context)
 
 
 def detail(request, pk):
@@ -78,6 +82,7 @@ def detail(request, pk):
     return render(request, 'articles/detail.html', context)
 
 
+# create(form) + update(값이 미리 들어가 있는 form)
 def update(request, pk):
     article = Article.objects.get(pk=pk)
     if request.method == 'POST':
@@ -89,9 +94,9 @@ def update(request, pk):
         article_form = ArticleForm(instance=article)
     context = {
         'article_form': article_form,
-        'article': article,
+       
     }
-    return render(request, 'articles/new.html', context)
+    return render(request, 'articles/update.html', context)
 
 
 def delete(request, pk):

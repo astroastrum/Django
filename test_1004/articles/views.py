@@ -44,6 +44,8 @@ def create(request):
   # 데이터의 개수가 많아지면 많아질수록 request.POST의 개수도 많아진다
   # article_form은 ArticleForm에 request.POST를 넘기고 
   # 만약에 article_form이 유효한지 검사할 수 있다
+
+  # 사용자의 input값을 받아서
   # article_form = ArticleForm(request.POST)
 	if article_form.is_valid():
 	article.form.save()
@@ -55,6 +57,7 @@ def create(request):
   또는 
 
   def create(request):
+    # 사용자의 input값을 받아서
     article_form = ArticleForm(request.POST)
 	  if article_form.is_valid():
 	      article.form.save()

@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load django_bootstrap5 %}
+
+{% block css %}
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+{% endblock %}
+
+{% block body %}
+
+  <h1>리뷰 수정 페이지</h1>
+  <form action="{% url 'reviews:update' review.pk %}">
+    <input type="text" name="title" value="{{ review.title }}"><br>
+    <input type="text" name="content" value="{{ review.content }}">
+    <input type="submit">
+  </form>
+{% endblock %}

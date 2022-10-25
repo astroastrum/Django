@@ -7,7 +7,7 @@
 {% block body %}
   <h1>new</h1>
 
-  <form action="{% url 'articles:create' %}" method="POST">
+  <form action="" method="POST">
     {% csrf_token %}
     {% bootstrap_form article_form %}
     <!-- {{ article_form.as_p }} -->

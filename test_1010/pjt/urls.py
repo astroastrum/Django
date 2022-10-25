@@ -26,4 +26,5 @@ urlpatterns = [
     path('welcome/<name>/', views.welcome),
     path('fake/', views.fake, name='fake'),
     path('fakenaver/', views.fakenaver, name='fakenaver'),
+    path('accounts/', include('accounts.urls')),
 ]
