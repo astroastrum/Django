@@ -115,6 +115,36 @@ def change_password(request):
 # (이미) 팔로우 상태이면,
 # 팔로우 취소 버튼을 누르면 삭제 (remove)
 
+
+# 팔로우 상태가 아니면, 팔로우를 누르면 추가 (add)
+# (이미) 팔로우 상태이면, 팔로우 취소 버튼을 누르면 삭제 (remove)
+
+@login_required
+def follow(request, user_pk):
+  # 프로필에 해당하는 유저를 로그인한 유저가
+  # 팔로우 상태가 아니면, 팔로우를 누르면 추가 (add)
+  user = get_user_model().objects.get(pk=user_pk)
+  if request.user == user:
+    messages.warning(request, 'self follow not allowed')
+    return redirect('accounts:detail', user_pk)
+  if request.user in user.followers.all():
+  # (이미) 팔로우 상태이면, 팔로우 취소 버튼을 누르면 삭제 (remove)
+    user.followers.remove(request.user)
+  else:
+  # 팔로우 상태가 아니면, '팔로우'를 누르면 추가
+    user.followers.add(request.user)
+  return redirect('accounts:detail', user_pk)
+
+
+
+
+
+
+
+
+
+
+'''
 @login_required
 def follow(request, user_pk):
   if request.user.is_authenticated:
@@ -132,6 +162,9 @@ def follow(request, user_pk):
         person.followers.add(request.user)
     return redirect('accounts:detail', user_pk)
   return redirect('accounts:login')
+'''
+
+
 
 
 '''
