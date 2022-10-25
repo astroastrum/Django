@@ -1,3 +1,4 @@
+from django.shortcuts import render, redirect, get_object_or_404
 from django.shortcuts import render, redirect
 # from django.contrib.auth.forms import UserCreationForm
 from .forms import CustomUserCreationForm, CustomUserChangeForm
@@ -115,16 +116,22 @@ def change_password(request):
 # 팔로우 취소 버튼을 누르면 삭제 (remove)
 
 @login_required
-def follow(request, pk):
+def follow(request, user_pk):
+  if request.user.is_authenticated:
+    person = get_object_or_404(get_user_model(), pk=user_pk)
+    if person != request.user:
     # 팔로우 상태가 아니면, '팔로우'를 누르면 추가(add)
     # user는 항상 get_user_model에서 
-    user = get_user_model().objects.get(pk=pk)
-    if request.user in user.followers.all():
-    # 프로필에 해당하는 유저를 로그인한 유저가
-        user.followings.add(request.user)
+      if person.followers.filter(pk=request.user.pk).exits():
+        person.followers.remove(request.user)
+      # user = get_user_model().objects.get(pk=user_pk)
+      # if request.user in user.followers.all():
+      # 프로필에 해당하는 유저를 로그인한 유저가
+      # user.followings.remove(request.user)
     else:
-        user.followers.add(request.user)
-    return redirect('accounts:detail', pk)
+        person.followers.add(request.user)
+    return redirect('accounts:detail', user_pk)
+  return redirect('accounts:login')
 
 
 '''
@@ -147,3 +154,4 @@ def follow(request, pk):
 
 
 '''
+

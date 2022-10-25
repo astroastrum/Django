@@ -15,11 +15,18 @@
     | 팔로워:
     {{ user.followers.count }}</p>
 
-  <a href="{% url 'accounts:follow' user.pk %}"></a>
-  {% if request.user in user.followers.all %}
-    <input type="submit" value="unfollow">팔로우 취소
-  {% else %}
-    <input type="submit" value="follow">팔로우
+  {% if user != person %}
+    <div>
+      <form action="{% url 'accounts:follow' user.user_pk %}" method='POST'>
+        {% csrf_token %}
+
+        {% if request.user in user.followers.all %}
+          <input type="submit" value="unfollow">
+        {% else %}
+          <input type="submit" value="follow">
+        {% endif %}
+      </form>
+    </div>
   {% endif %}
   {{ user.following.count }}
 
