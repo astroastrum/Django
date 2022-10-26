@@ -23,7 +23,8 @@ def signup(request):
     # 사용자가 입력한 값을(request.POST) form에 넣음
     form = CustomUserCreationForm(request.POST)
     if form.is_valid():
-      form.save()
+      user = form.save()
+      auth_login(request, user)
       return redirect('articles:index')
   else: # GET 요청일 경우
     form = CustomUserCreationForm()
@@ -32,6 +33,8 @@ def signup(request):
     'form': form
   }
   return render(request, 'accounts/signup.html', context)
+
+
 
 def index(request):
   return render(request, 'accounts/index.html')
@@ -46,7 +49,7 @@ def login(request):
     # ModelForm이 아니라서 save() 없음
     if form.is_valid():
       auth_login(request, form.get_user())
-      return redirect('articles:index')
+      return redirect(request.GET.get('next') or 'articles:index')
   else:
     # form처리 한다고 로그인 되는 것은 아니여서 로직을 추가해야함
     form = AuthenticationForm()
@@ -68,7 +71,8 @@ def detail(request, pk):
     # User 정보를 받아오는 쿼리셋 API
     # User class 참조할 때는 from django.contrib.auth import get_user_model
     # user = User.objects.get(pk=pk), User가 아닌 get_user_model()
-    user = get_user_model().objects.get(pk=pk)
+    # user = get_user_model().objects.get(pk=pk)
+    user = get_object_or_404(get_user_model(), pk=pk)
     context = {
         'user': user
     }
@@ -90,6 +94,8 @@ def update(request):
         if form.is_valid():
             form.save()
             return redirect('accounts:detail', request.user.pk)
+    else:
+      form = CustomUserChangeForm(instance=request.user)
  
     context = {
         "form": form
@@ -120,20 +126,21 @@ def change_password(request):
 # (이미) 팔로우 상태이면, 팔로우 취소 버튼을 누르면 삭제 (remove)
 
 @login_required
-def follow(request, user_pk):
+def follow(request, pk):
   # 프로필에 해당하는 유저를 로그인한 유저가
   # 팔로우 상태가 아니면, 팔로우를 누르면 추가 (add)
-  user = get_user_model().objects.get(pk=user_pk)
+  # user = get_user_model().objects.get(pk=user_pk)
+  user = get_object_or_404(get_user_model(), pk=pk)
   if request.user == user:
     messages.warning(request, 'self follow not allowed')
-    return redirect('accounts:detail', user_pk)
+    return redirect('accounts:detail', pk)
   if request.user in user.followers.all():
   # (이미) 팔로우 상태이면, 팔로우 취소 버튼을 누르면 삭제 (remove)
     user.followers.remove(request.user)
   else:
   # 팔로우 상태가 아니면, '팔로우'를 누르면 추가
     user.followers.add(request.user)
-  return redirect('accounts:detail', user_pk)
+  return redirect('accounts:detail', pk)
 
 
 

@@ -5,9 +5,17 @@
 {% block css %}{% endblock %}
 
 {% block body %}
-  <h1>new</h1>
+  {% if request.resolver_match.url_name == 'create' %}
+    <h1>
+      글쓰기
+    </h1>
+  {% else %}
+    <h1>
+      수정하기
+    </h1>
+  {% endif %}
 
-  <form action="" method="POST">
+  <form action="" method="POST" enctype="multipart/form-data">
     {% csrf_token %}
     {% bootstrap_form article_form %}
     <!-- {{ article_form.as_p }} -->
