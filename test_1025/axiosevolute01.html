@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>실습</title>
-
+ 
   <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 
@@ -21,9 +21,14 @@
  
     const URL = 'http://jsonplaceholder.typicode.com/todos/1'
     axios.get(URL) 
-      .then(response => console.log(response))
+      .then(response => {
+        const p = document.createElement('p')
+        p.innerText = response.data.title
+        body.appendChild(p)
+      })
       .catch(err => console.log('${err}!!!'))
     console.log('안녕 장고! 콘솔창에 JSON 값을 출력했구나')
+  
   </script>
 </body>
 
