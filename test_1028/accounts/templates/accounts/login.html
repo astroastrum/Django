@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% load django_bootstrap5 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+{% block content %}
+
+  <h1 class="text-center">로그인</h1>
+
+  <div class="create border py-5">
+    <p class="text-center">
+      <img src="https://cdn-icons-png.flaticon.com/512/433/433749.png" width="180" height="60" alt=""/>
+    </p>
+    <form action="{% url 'accounts:login' %}" method="POST" enctype="multipart/form-data">
+      {% csrf_token %}
+      {% bootstrap_form forms %}
+      {% bootstrap_button content="로그인" button_type="submit" button_class="btn-outline-primary w-100" %}
+    </form>
+  </div>
+{% endblock content %}

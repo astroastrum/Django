@@ -1,0 +1,109 @@
+{% extends 'base.html' %}
+{% load django_bootstrap5 %}
+{% block content %}
+  <div class="container">
+    <div class="row">
+      <div class="col-4 p-3">
+        {% if person.image %}
+          <img src="{{ person.image.url }}" alt="">
+        {% else %}
+          <img src="https://dummyimage.com/300x200/deed11/e1ff00" alt="프사 대체">
+        {% endif %}
+      </div>
+      <div class="col p-3">
+        <div class="d-flex">
+          <h2 class="fw-bold">{{ person }}
+            <span class="fs-5 ms-3 fw-light">팔로잉 :
+              {{ person.followings.count }}
+              |
+            </span><span class="fs-5 fw-light">팔로워 :
+              {{ person.followers.count }}</span></h2>
+
+          {% if request.user.is_authenticated %}
+            <p class="ms-5">
+              <form action="{% url 'accounts:follow' person.pk %}" method="POST">
+                {% csrf_token %}
+                <input type="submit" value="팔로우" class="btn btn-outline-primary">
+
+              </form>
+            </p>
+          {% endif %}
+        </div>
+        <hr>
+        <a class="fs-5 fw-light" href="{% url 'accounts:profile_update' %}">회원정보 수정
+        </a>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Navagation -->
+  <div class="card text-center">
+    <div class="card-header">
+      <ul class="nav nav-tabs card-header-tabs">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="true" href="#">Activity Feed</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">게시물</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="#">Photos</a>
+        </li>
+      </ul>
+    </div>
+    <div class="card-body">
+      <!-- 회원정보 -->
+      <div class="row row-cols-1 row-cols-md-2 g-4">
+        <div class="col">
+          <div class="card">
+
+            <div class="card-body">
+              <h5 class="card-title">회원정보</h5>
+              <p align="left">이메일 :
+                {{ person.email }}</p>
+              <p align="left">가입일 :
+                {{ person.date_joined }}</p>
+              <p align="left">마지막 로그인 :
+                {{ person.last_login }}</p>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card">
+
+            <div class="card-body">
+              <h5 class="card-title">Fill Out Your Profile</h5>
+              <p class="card-text">Add photos and info to your profile</p>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">방명록</h5>
+              <ul class="imoji_list">
+                <li class="nav-item">
+                  <a class="nav-link" align="justify" href="">
+                    <i class="bi bi-camera"></i>
+                  </a>
+                </li>
+                <div class="d-flex justify-content-start">
+                  <li class="nav-item">
+                    <a class="nav-link" href="{% url 'reviews:index' %}">
+                      <i class="bi bi-pencil-square"></i>
+                      <a class="pencil" href="">리뷰 작성</a>
+                    </div>
+                </ul>
+              </a>
+            </li>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+{% endblock %}
