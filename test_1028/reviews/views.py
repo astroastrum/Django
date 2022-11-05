@@ -1,6 +1,7 @@
 from django.shortcuts import render
 
 
+
 # 데이터 처리 기능
 # Create = 글 작성/ 제품 등록   > 데이터베이스 조작어 INSERT
 # Read = 글 읽기/ 제품 확인   > SELECT
