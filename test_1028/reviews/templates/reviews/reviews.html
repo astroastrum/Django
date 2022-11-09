@@ -1,2 +1,124 @@
 {% extends 'base.html' %}
-{% block body %}{% endblock body %}
+{% block body %}
+  <div class="position-relative d-flex justify-content-center" style="background-image:url({% static 'reviews/main.jpg' %}); height:640px; background-size:cover; margin: 0px 12px">
+    <div style="position:absolute; left:50%; bottom:40%; transform:translate(-50%, -50%); width:35%">
+      <form class="d-flex" role="search" action=" {% url 'reviews:search' %}" style="height:40px;">
+        <input class="form-control me-2" type="search" placeholder="Search" name="search">
+        <button class="btn btn-dark" type="submit">Search</button>
+      </form>
+    </div>
+    <div class="d-flex" style="position:absolute; left:50%; bottom:20%;">
+      <p style="color:rgb(255, 255, 255); text-shadow: 4px 4px 4px black; font-weight:bold; transform:translate(-50%, -50%); font-size: 48px;">Bean's Travel</p>
+    </div>
+
+  </div>
+  <div class="container my-3">
+    <h3 class="text-center">인기 여행지</h3>
+    <div class="d-flex justify-content-center">
+      <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+        <li class="nav-item mx-3" role="presentation">
+          <button class="nav-link active" id="pills-domestic-tab" data-bs-toggle="pill" data-bs-target="#pills-domestic" type="button" role="tab" aria-controls="pills-domestic" aria-selected="true">국내</button>
+        </li>
+        <li class="nav-item mx-3" role="presentation">
+          <button class="nav-link" id="pills-overseas-tab" data-bs-toggle="pill" data-bs-target="#pills-overseas" type="button" role="tab" aria-controls="pills-overseas" aria-selected="false">해외</button>
+        </li>
+      </ul>
+    </div>
+    <div class="tab-content" id="pills-tabContent">
+      <div class="tab-pane fade show active" id="pills-domestic" role="tabpanel" aria-labelledby="pills-domestic-tab" tabindex="0">
+        <div class="row row-cols-4 g-3">
+          {% for domestic in domestics %}
+            <div class="col mt-3" style="position:relative">
+              <a href="{% url 'reviews:hotlist' domestic.pk %}">
+                {% for img in domestic.image.all %}
+                  {% if forloop.first %}
+                    <img src="{{ img.image.url }}" alt="" class="img-fluid">
+                  {% endif %}
+                {% endfor %}
+                <span style="color:rgb(255, 255, 255); text-shadow: 1px 1px 2px black; font-weight:bold; font-size:100%; position:absolute; left:50%; bottom:0%; transform:translate(-50%, -50%);">{{ domestic.location }}</span>
+              </a>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+      <div class="tab-pane fade" id="pills-overseas" role="tabpanel" aria-labelledby="pills-overseas-tab" tabindex="0">
+        <div class="row row-cols-4 g-3">
+          {% for oversea in overseas %}
+            <div class="col mt-3" style="position:relative">
+              <a href="{% url 'reviews:hotlist' oversea.pk %}">
+                {% for img in oversea.image.all %}
+                  {% if forloop.first %}
+                    <img src="{{ img.image.url }}" alt="" class="img-fluid">
+                  {% endif %}
+                {% endfor %}
+                <span style="color:rgb(255, 255, 255); text-shadow: 1px 1px 2px black; font-weight:bold; font-size:100%; position:absolute; left:50%; bottom:0%; transform:translate(-50%, -50%);">{{ oversea.location }}</span>
+              </a>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+
+    <div class="d-flex justify-content-center mt-5">
+      <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+        <li class="nav-item mx-5" role="presentation">
+          <button class="nav-link active" id="pills-domestic-tab" data-bs-toggle="pill" data-bs-target="#pills-domestic" type="button" role="tab" aria-controls="pills-domestic" aria-selected="true">테마 별</button>
+        </li>
+      </ul>
+    </div>
+    <div class="tab-content" id="pills-tabContent">
+      <div class="tab-pane fade show active" id="pills-domestic" role="tabpanel" aria-labelledby="pills-domestic-tab" tabindex="0">
+        <div class="row row-cols-4 g-3">
+          <div class="col mt-3" style="position:relative">
+            <a href="{% url 'reviews:hotlist_theme' '테마파크' %}">
+              <img src="https://a.cdn-hotels.com/gdcs/production12/d1504/10e45676-c629-4a29-bc5c-f6c697110c88.jpg?impolicy=fcrop&w=1600&h=1066&q=medium" alt="" class="img-fluid">
+              <span style="color:rgb(255, 255, 255); text-shadow: 1px 1px 2px black; font-weight:bold; font-size:100%; position:absolute; left:50%; bottom:0%; transform:translate(-50%, -50%);">테마파크</span>
+            </a>
+          </div>
+          <div class="col mt-3" style="position:relative">
+            <a href="{% url 'reviews:hotlist_theme' '액티비티' %}">
+              <img src="https://t2.daumcdn.net/thumb/R720x0/?fname=http://t1.daumcdn.net/brunch/service/user/STq/image/pSjMuea7793KQT7mChi-oSJFM_s.jpg" alt="" class="img-fluid">
+              <span style="color:rgb(255, 255, 255); text-shadow: 1px 1px 2px black; font-weight:bold; font-size:100%; position:absolute; left:50%; bottom:0%; transform:translate(-50%, -50%);">액티비티</span>
+            </a>
+          </div>
+          <div class="col mt-3" style="position:relative">
+            <a href="{% url 'reviews:hotlist_theme' '산' %}">
+              <img src="https://a.cdn-hotels.com/gdcs/production86/d584/6ea9ec83-b348-47b6-b271-c5103b52a3d4.jpg?impolicy=fcrop&w=1600&h=1066&q=medium" alt="" class="img-fluid">
+              <span style="color:rgb(255, 255, 255); text-shadow: 1px 1px 2px black; font-weight:bold; font-size:100%; position:absolute; left:50%; bottom:0%; transform:translate(-50%, -50%);">산</span>
+            </a>
+          </div>
+          <div class="col mt-3" style="position:relative">
+            <a href="{% url 'reviews:hotlist_theme' '바다' %}">
+              <img src="https://a.cdn-hotels.com/gdcs/production47/d524/cf53813b-845b-42f3-a749-74875dd8bbf1.jpg?impolicy=fcrop&w=1600&h=1066&q=medium" alt="" class="img-fluid">
+              <span style="color:rgb(255, 255, 255); text-shadow: 1px 1px 2px black; font-weight:bold; font-size:100%; position:absolute; left:50%; bottom:0%; transform:translate(-50%, -50%);">바다</span>
+            </a>
+          </div>
+          <div class="col mt-3" style="position:relative">
+            <a href="{% url 'reviews:hotlist_theme' '도시' %}">
+              <img src="https://a.cdn-hotels.com/gdcs/production166/d1162/7597a801-c9fe-419f-94a6-d2527b6da8c3.jpg?impolicy=fcrop&w=1600&h=1066&q=medium" alt="" class="img-fluid">
+              <span style="color:rgb(255, 255, 255); text-shadow: 1px 1px 2px black; font-weight:bold; font-size:100%; position:absolute; left:50%; bottom:0%; transform:translate(-50%, -50%);">도시</span>
+            </a>
+          </div>
+          <div class="col mt-3" style="position:relative">
+            <a href="{% url 'reviews:hotlist_theme' '관광' %}">
+              <img src="https://a.cdn-hotels.com/gdcs/production39/d438/9d5a5660-c13f-466f-826d-4e08e6a6abd4.jpg?impolicy=fcrop&w=1600&h=1066&q=medium" alt="" class="img-fluid">
+              <span style="color:rgb(255, 255, 255); text-shadow: 1px 1px 2px black; font-weight:bold; font-size:100%; position:absolute; left:50%; bottom:0%; transform:translate(-50%, -50%);">관광</span>
+            </a>
+          </div>
+          <div class="col mt-3" style="position:relative">
+            <a href="{% url 'reviews:hotlist_theme' '문화재' %}">
+              <img src="https://a.cdn-hotels.com/gdcs/production74/d812/f9ad49aa-de60-4062-9321-fbd0e60e019b.jpg?impolicy=fcrop&w=1600&h=1066&q=medium" alt="" class="img-fluid">
+              <span style="color:rgb(255, 255, 255); text-shadow: 1px 1px 2px black; font-weight:bold; font-size:100%; position:absolute; left:50%; bottom:0%; transform:translate(-50%, -50%);">문화재</span>
+            </a>
+          </div>
+          <div class="col mt-3" style="position:relative">
+            <a href="{% url 'reviews:hotlist_theme' 'all' %}">
+              <img src="{% static 'reviews/etc.jpg' %}" alt="" class="img-fluid">
+              <span style="color:rgb(255, 255, 255); text-shadow: 1px 1px 2px black; font-weight:bold; font-size:100%; position:absolute; left:50%; bottom:0%; transform:translate(-50%, -50%);">etc</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  {% endblock body %}

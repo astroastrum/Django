@@ -12,6 +12,7 @@ from django.contrib.auth.decorators import login_required
 app_name = 'accounts'
 # Create your views here.
 def signup(request):
+    # 사용자가 입력한 값을 받는다
     if request.method == "POST":
         forms = SignupForm(request.POST, request.FILES)
         if forms.is_valid():
