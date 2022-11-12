@@ -1,24 +1,26 @@
+{% load django_bootstrap5 %}
+{% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 
   <head>
-    {% load django_bootstrap5 %}
-    {% load static %}
-
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BeanTeam Project</title>
-    {% bootstrap_css %}
-    {% block css %}
-      <link rel="stylesheet" href="{% static 'css/style.css' %}">{% endblock css %}
+    <title></title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+    {% bootstrap_css %}
+    {% block css %}{% endblock css %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
   </head>
 
   <body>
+
     <div class="container">
-      {% block content %}{% endblock content %}
+      {% block body %}{% endblock body %}
     </div>
+    {% bootstrap_javascript %}
   </body>
 
 </html>
