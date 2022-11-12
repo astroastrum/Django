@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% load django_bootstrap5 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
+{% block content %}
+
+  <div>
+    <h2>글 작성</h2>
+    <form action="" method="POST">
+      {% csrf_token %}
+      {% bootstrap_form article_form %}
+      <input type="submit">
+    </form>
+
+  {% endblock content %}
