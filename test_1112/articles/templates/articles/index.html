@@ -7,6 +7,9 @@
 {% block body %}
   <div class="header d-flex flex-column justify-content-center align-items-center">
     <h1 class="fs-1 fw-bolder text-white">질문 게시판</h1>
+    <!-- staticfiles(images) -->
+    <img src="{% static 'mas_01.webp' %}" alt="">
+    <hr>
     {% if request.user.is_authenticated %}
       <a class="btn btn-primary my-3 float-right" href="{% url 'articles:create' %}">글쓰기</a>
     {% endif %}
