@@ -8,16 +8,18 @@
   <div class="header d-flex flex-column justify-content-center align-items-center">
     <h1 class="fs-1 fw-bolder text-white">질문 게시판</h1>
     {% if request.user.is_authenticated %}
-      <a class="btn btn-primary my-3 float-right" href="{% url 'articles:create' %}">질문 하기</a>
+      <a class="btn btn-primary my-3 float-right" href="{% url 'articles:create' %}">글쓰기</a>
     {% endif %}
   </div>
 
   <!-- 사용자가 업로드한 이미지들이 나열됨 -->
+  <!-- for문을 카드로 돌린다 -->
   <div class="row">
     {% for article in articles %}
       <div class="col-4 my-3">
         <div class="card">
           {% if article.image %}
+            <!-- 이미지를 url로 사용해서 보여줌 -->
             <img src="{{ article.image.url }}" class="card-img-top" alt="...">
           {% else %}
             <img src="" class="card-img-top">

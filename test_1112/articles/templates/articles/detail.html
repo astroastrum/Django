@@ -2,7 +2,7 @@
 {% load django_bootstrap5 %}
 
 {% block body %}
-
+  <!-- N번째 사용자가 업로드한 글과 이미지 -->
   <!-- 이미지 업로드한 것 보여주기 <img src="{{ article.image.url }}" alt="{{ article.image }}"> <a href="{% url 'articles:update' article.pk %}">수정하기</a> -->
   <h1>{{ article.title }}</h1>
   <!-- 1, 2, 3등, N번 사용자의 게시글 -->
@@ -19,9 +19,12 @@
     </p>
   {% endif %}
   <hr>
+
   <p>{{ article.content }}
   </p>
   <!-- N번 사용자가 올린 이미지-->
+  <!-- 이미지가 너무 커서 너비를 400, 높이를 300으로 바꿈 -->
+  <!-- 이미지 용량이 너무 크면 보여주는 데에 시간이 많이 걸림 -->
   {% if article.image %}
     <img src="{{ article.image.url }}" alt="{{ article.image }}" width="400" height="300">
   {% endif %}
