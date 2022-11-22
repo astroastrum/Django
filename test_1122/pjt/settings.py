@@ -40,9 +40,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.sites',
     'allauth',
-    'allauth.accounts',
+    'allauth.account',
     'allauth.socialaccount',
-    'allauth.socialaccount.provides.google',
+    'allauth.socialaccount.providers.google',
 ]
 
 MIDDLEWARE = [
