@@ -7,3 +7,4 @@ def signup(request):
 # 로그인 기능 
 # django-allauth 사용하기
 # pip install django-allauth
+# 설치 후, settings.py에 반드시 등록
