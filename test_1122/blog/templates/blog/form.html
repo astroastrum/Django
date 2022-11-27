@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load django_bootstrap5 %}
+
+{% block css %}{% endblock %}
+
+{% block body %}
+  <!-- views의 create함수와 update함수가 form.html로 넘어갈때 분기 -->
+  {% if request.resolver_match.url_name == 'create' %}
+    <h1>
+      글쓰기
+    </h1>
+  {% else %}
+    <h1>
+      수정하기
+    </h1>
+  {% endif %}
+
+  <form action="" method="POST">
+    {% csrf_token %}
+    {% bootstrap_form article_form %}
+  </form>
+{% endblock %}

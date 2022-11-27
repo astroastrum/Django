@@ -1,13 +1,17 @@
-<!DOCTYPE html>
-<html lang="ko">
+{% extends 'base.html' %}
+{% load static %}
+{% load django_bootstrap5 %}
 
-  <head>
-    <meta charset="UTF-8">
-    <title>Blog</title>
-  </head>
+{% block css %}{% endblock %}
 
-  <body>
-    <h1>Blog</h1>
-  </body>
+{% block body %}
+  <h1>Blog</h1>
+  {% for article in articles %}
+    <p>title:
+      {{ article.title }}
+      |
+      {{ article.created_at }}</p>
+  {% endfor %}
 
-</html>
+  <a href="{% url 'blog:create' %}">글작성</a>
+{% endblock %}

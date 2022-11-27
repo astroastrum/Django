@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load django_bootstrap5 %}
+
+{% block css %}{% endblock %}
+
+{% block body %}
+  <h1>{{ article.title }}</h1>
+  <p>{{ article.pk }}번 게시글 |
+    <a href="{% url 'accounts:detail' article.user.pk %}">{{ article.user.username }}</a>
+  </p>
+  <p>{{ article.created_at|date:"SHORT_DATETIME_FORMAT" }}
+    |
+    {{ article.updated_at|date:"y-m-d D" }}</p>
+  <p>
+    <a href="{% url 'articles:update' article.pk %}">수정하기</a>
+  </p>
+
+{% endblock %}
