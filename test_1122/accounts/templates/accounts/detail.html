@@ -1,0 +1,120 @@
+<!-- 유저 게시물 정보 -->
+<div class="tabmenu-div">
+  <div class="tabmenu">
+    <ul class="d-flex justify-content-between p-0">
+      <li id="tab1" class="" style="width: 450px;">
+
+        <label for="tabmenu1">작성 게시물 ({{customer.review_set.all|length}})</label>
+        <div class="tabCon">
+          <h4>{{customer.username}}님의 작성글</h4>
+          {% for post in review_page %}
+            <a href="{% url 'reviews:detail' review.pk %}">
+              <p>{{ review.title }}</p>
+            </a>
+          {% endfor %}
+          <!--유저 게시물 정보 페이지네이션 -->
+          <div id="paging">
+            <ul class="pagination justify-content-center" style="margin-top: 2rem;">
+              <!-- 이전페이지 -->
+              {% if review_page.has_previous %}
+                <li class="page-item">
+                  <a class="page-link" href="?&reviewpage={{ review_page.previous_page_number }}">이전</a>
+                  <!-- href로 뎁스 설정 -->
+
+                {% else %}
+                  <li class="page-item disabled">
+                    <a class="page-link" tabindex="-1" aria-disabled="true" href="#">이전</a>
+                  </li>
+                {% endif %}
+                <!-- 페이지리스트 -->
+                {% for page_number in review_page.paginator.page_range %}
+                  {% if page_number == review_page.number %}
+                    <li class="page-item active" aria-current="page">
+                      <a class="page-link" href="?&reviewpage={{ page_number }}">{{ page_number }}</a>
+                    </li>
+                  {% else %}
+                    <li class="page-item">
+                      <a class="page-link" href="?&reviewpage={{ page_number }}">{{ page_number }}</a>
+                    </li>
+                  {% endif %}
+                {% endfor %}
+                <!-- 다음페이지 -->
+                {% if review_page.has_next %}
+                  <li class="page-item">
+                    <a class="page-link" href="?&reviewpage={{ review_page.next_page_number }}">다음</a>
+                  </li>
+                {% else %}
+                  <li class="page-item disabled">
+                    <a class="page-link" tabindex="-1" aria-disabled="true" href="#">다음</a>
+                  </li>
+                {% endif %}
+              </ul>
+            </div>
+            <!-- 페이징끝 -->
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      font-size: 15px;
+      line-height: 1.3;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    .tabmenu-div {
+      margin-top: 45px;
+      width: 100%;
+      height: 30rem;
+    }
+
+    .tabmenu {
+      padding: 0 200px;
+      width: 100%;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    .tabmenu ul {
+      position: relative;
+    }
+
+    .tabmenu ul li {
+      display: inline-block;
+      width: 33.33%;
+      float: left;
+      text-align: center;
+      background: #f9f9f9;
+      line-height: 40px;
+    }
+
+    .tabmenu label {
+      display: block;
+      width: 100%;
+      height: 40px;
+      line-height: 40px;
+    }
+
+    .tabmenu input {
+      display: none;
+    }
+
+    .tabCon {
+      display: none;
+      width: 100%;
+      text-align: left;
+      padding: 20px;
+      position: absolute;
+      left: 0;
+      top: 40px;
+      box-sizing: border-box;
+      border: 5px solid #f9f9f9;
+    }
+  </style>
