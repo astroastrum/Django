@@ -9,3 +9,11 @@ const december = document.querySelector('#december');
 december.style.color = 'white';
 // font-size 속성 변경
 december.style.fontsize = '10px';
+
+const strokeColor = '#228B22';
+// -webkit-text-stroke 속성 변경
+december.style.webkitTextStroke = '2px ${strokeColor}';
+// text-stroke 속성 변경
+december.style.textStroke = '2px ${strokeColor}';
+// text-shadow 속성 변경
+december.style.textShadow = '7px 7px 0 #90EE90';
