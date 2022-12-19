@@ -13,3 +13,13 @@ imgA.src = 'images/photo_j.jpg';
 const imgK = document.querySelector
 ('#myImageK');
 imgB.src = 'images/photo_k.jpg';
+
+
+// 날씨
+const weatherInformation =
+document.querySelector('#weather-information');
+
+// <p id="weather-information">비<span class="temperature">(16)</span></p>console.log(weatherInformation.outerHTML);
+
+// <p id="weather-information"></p>
+weatherInformation.outerHTML = '<img src="sample-image.png">';
