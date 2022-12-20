@@ -23,3 +23,9 @@ document.querySelector('#weather-information');
 
 // <p id="weather-information"></p>
 weatherInformation.outerHTML = '<img src="sample-image.png">';
+
+// requestAnimationFrame
+tick();
+function tick() {
+  requestAnimationFrame(tick);
+}
