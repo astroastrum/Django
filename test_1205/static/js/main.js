@@ -29,3 +29,10 @@ tick();
 function tick() {
   requestAnimationFrame(tick);
 }
+
+// 날짜
+const date = new Date();
+const year = date.getFullYear();
+
+// HTML
+document.querySelector('#log').innerHTML = '지금은 ${year}년입니다.';
