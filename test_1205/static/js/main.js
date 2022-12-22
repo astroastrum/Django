@@ -36,3 +36,7 @@ const year = date.getFullYear();
 
 // HTML
 document.querySelector('#log').innerHTML = '지금은 ${year}년입니다.';
+
+const date = new Date();
+const month = date.getMonth() + 1;
+const day = date.getDate();
