@@ -40,3 +40,9 @@ document.querySelector('#log').innerHTML = '지금은 ${year}년입니다.';
 const date = new Date();
 const month = date.getMonth() + 1;
 const day = date.getDate();
+
+// time
+const date = new Date();
+const hour = date.getHours();
+const minutes = date.getMinutes();
+const seconds = date.getSeconds();
