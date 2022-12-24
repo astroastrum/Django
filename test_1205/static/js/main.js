@@ -46,3 +46,12 @@ const date = new Date();
 const hour = date.getHours();
 const minutes = date.getMinutes();
 const seconds = date.getSeconds();
+
+const num1 = Date.parse('2020/12/25');
+console.log(num1);
+
+const num2 = Date.parse('12 25 2020');
+console.log(num2);
+
+const num = Date.now();
+console.log(num); 
