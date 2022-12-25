@@ -53,5 +53,11 @@ console.log(num1);
 const num2 = Date.parse('12 25 2020');
 console.log(num2);
 
+
 const num = Date.now();
 console.log(num); 
+
+// 스크롤
+window.addEventListener('scroll', () => {
+  console.log('스크롤', window.scrollX, window.scrollY);
+});
