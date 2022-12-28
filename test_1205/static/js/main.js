@@ -77,3 +77,9 @@ const minutes = date.getMinutes();
 const seconds = date.getSeconds();
 
 const label = '${hour}시${minutes}분${seconds}초';
+
+// 시간
+const hourElement = document.querySelector('.hour');
+const minuteElement = document.querySelector('minute');
+const secondElement = document.querySelector('.second');
+update();
