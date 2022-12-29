@@ -83,3 +83,13 @@ const hourElement = document.querySelector('.hour');
 const minuteElement = document.querySelector('minute');
 const secondElement = document.querySelector('.second');
 update();
+
+// 시간 control
+setTimeout(timer1, 1000);
+function timer1() {
+  // 처리 작업
+}
+
+setTimeout(function() {
+  console.log(this);  
+}, 1000); 
