@@ -93,3 +93,9 @@ function timer1() {
 setTimeout(function() {
   console.log(this);  
 }, 1000); 
+
+// 요일
+const date = new Date();
+const day = date.getDay();
+const dayList = ['일', '월', '화', '수', '목', '금', '토'];
+const label = dayList[day];
